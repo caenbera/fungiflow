@@ -4,7 +4,7 @@ import { useAuthStore } from '@/store/auth';
 import { ResumenDashboard } from '@/components/dashboard/ResumenDashboard';
 import { useCurrencyStore } from '@/store/currency';
 import { useCotizacionesStore } from '@/store/cotizaciones';
-import { currencyLabel } from '@/lib/currencies';
+import { CurrencyFlag } from '@/components/shared/CurrencyFlag';
 
 export default function DashboardPage() {
   const { user } = useAuthStore();
@@ -24,7 +24,7 @@ export default function DashboardPage() {
           Hola, {user?.displayName?.split(' ')[0] || 'bienvenido/a'} 👋
         </h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Proyecto activo · Precios en <strong>{currencyLabel(currency)}</strong>
+          Proyecto activo · Precios en <CurrencyFlag currency={currency} className="font-bold" />
         </p>
       </div>
 
