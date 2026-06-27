@@ -15,6 +15,7 @@ export interface CotizacionItem {
   unidad: string;
   precioUnitario: number; // siempre en COP
   subtotal: number;
+  imagenUrl?: string;
 }
 
 export type CategoriaCotizacion =

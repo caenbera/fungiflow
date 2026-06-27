@@ -3,20 +3,18 @@
 import { useAuthStore } from '@/store/auth';
 import { ResumenDashboard } from '@/components/dashboard/ResumenDashboard';
 import { useCurrencyStore } from '@/store/currency';
-
-// Demo data — en producción esto viene de Firestore
-const DEMO_COTIZACIONES = [
-  { categoria: 'construccion' as const, nombre: 'Bodega principal', total: 12_000_000 },
-  { categoria: 'equipos' as const, nombre: 'Autoclave + mezcladora', total: 8_500_000 },
-  { categoria: 'materiaprima' as const, nombre: 'Aserrín y sustratos', total: 3_200_000 },
-  { categoria: 'consumibles' as const, nombre: 'Bolsas y tapones', total: 1_100_000 },
-  { categoria: 'manodeobra' as const, nombre: '2 trabajadores x 3 meses', total: 5_400_000 },
-  { categoria: 'servicios' as const, nombre: 'Electricidad y agua', total: 900_000 },
-];
+import { useCotizacionesStore } from '@/store/cotizaciones';
 
 export default function DashboardPage() {
   const { user } = useAuthStore();
   const { currency } = useCurrencyStore();
+  const { cotizaciones, loading } = useCotizacionesStore();
+
+  const resumen = cotizaciones.map((c) => ({
+    categoria: c.categoria,
+    nombre: c.nombre,
+    total: c.total,
+  }));
 
   return (
     <div className="space-y-6">
@@ -29,10 +27,18 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <ResumenDashboard
-        cotizaciones={DEMO_COTIZACIONES}
-        proyectoNombre="Cultivo Orellana — Fase 1"
-      />
+      {loading ? (
+        <p className="text-sm text-muted-foreground">Cargando datos...</p>
+      ) : resumen.length === 0 ? (
+        <p className="text-sm text-muted-foreground">
+          Aún no hay cotizaciones. Ve a <strong>Cotizaciones</strong> y crea tu primera.
+        </p>
+      ) : (
+        <ResumenDashboard
+          cotizaciones={resumen}
+          proyectoNombre="Cultivo Orellana — Fase 1"
+        />
+      )}
     </div>
   );
 }
