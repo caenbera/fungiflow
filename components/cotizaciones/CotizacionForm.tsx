@@ -5,6 +5,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { useCurrencyStore } from '@/store/currency';
 import { useAuthStore } from '@/store/auth';
 import { guardarCotizacion } from '@/lib/firestore';
+import { currencyLabel } from '@/lib/currencies';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -142,7 +143,7 @@ export function CotizacionForm({ categoria }: Props) {
                 </div>
                 {subtotal > 0 && (
                   <p className="text-xs text-right text-muted-foreground pr-7">
-                    Subtotal: <span className="font-semibold text-foreground">{formatAmount(subtotal)} {currency}</span>
+                    Subtotal: <span className="font-semibold text-foreground">{formatAmount(subtotal)} {currencyLabel(currency)}</span>
                   </p>
                 )}
               </div>
@@ -170,7 +171,7 @@ export function CotizacionForm({ categoria }: Props) {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs text-muted-foreground">Total cotización</p>
-            <p className="text-2xl font-bold text-green-700">{formatAmount(total)} {currency}</p>
+            <p className="text-2xl font-bold text-green-700">{formatAmount(total)} {currencyLabel(currency)}</p>
           </div>
           <div className="flex gap-2">
             <Button type="button" variant="outline" onClick={() => reset()}>Limpiar</Button>

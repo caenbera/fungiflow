@@ -12,13 +12,19 @@ export function suscribirCotizaciones(
   onChange: (cotizaciones: Cotizacion[]) => void
 ) {
   const q = query(collection(db, COL), where('userId', '==', userId));
-  return onSnapshot(q, (snap) => {
-    const data = snap.docs.map((d) => ({
-      id: d.id,
-      ...(d.data() as Omit<Cotizacion, 'id'>),
-    }));
-    onChange(data);
-  });
+  return onSnapshot(
+    q,
+    (snap) => {
+      const data = snap.docs.map((d) => ({
+        id: d.id,
+        ...(d.data() as Omit<Cotizacion, 'id'>),
+      }));
+      onChange(data);
+    },
+    (error) => {
+      console.error('[Firestore] Error en suscripción:', error.code, error.message);
+    }
+  );
 }
 
 export async function guardarCotizacion(

@@ -11,6 +11,7 @@ import { Trash2, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCotizacionesStore } from '@/store/cotizaciones';
 import { useCurrencyStore } from '@/store/currency';
 import { eliminarCotizacion } from '@/lib/firestore';
+import { currencyLabel } from '@/lib/currencies';
 import { toast } from 'sonner';
 import type { CategoriaCotizacion, Cotizacion } from '@/types';
 
@@ -41,7 +42,7 @@ function CotizacionCard({ cot }: { cot: Cotizacion }) {
             <p className="text-xs text-muted-foreground">{cot.items.length} ítems · {new Date(cot.creadoEn).toLocaleDateString('es-CO')}</p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm font-bold text-green-700">{formatAmount(cot.total)} {currency}</span>
+            <span className="text-sm font-bold text-green-700">{formatAmount(cot.total)} {currencyLabel(currency)}</span>
             <button onClick={() => setExpanded((v) => !v)} className="text-muted-foreground hover:text-foreground">
               {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </button>
@@ -68,9 +69,9 @@ function CotizacionCard({ cot }: { cot: Cotizacion }) {
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-xs truncate">{item.descripcion}</p>
-                  <p className="text-xs text-muted-foreground">{item.cantidad} {item.unidad} × {formatAmount(item.precioUnitario)} {currency}</p>
+                  <p className="text-xs text-muted-foreground">{item.cantidad} {item.unidad} × {formatAmount(item.precioUnitario)} {currencyLabel(currency)}</p>
                 </div>
-                <span className="text-xs font-medium shrink-0">{formatAmount(item.subtotal)} {currency}</span>
+                <span className="text-xs font-medium shrink-0">{formatAmount(item.subtotal)} {currencyLabel(currency)}</span>
               </div>
             ))}
             {cot.notas && <p className="text-xs text-muted-foreground italic pt-1">📝 {cot.notas}</p>}
