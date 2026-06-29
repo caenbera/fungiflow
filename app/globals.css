@@ -163,55 +163,51 @@
   overflow: hidden;
   transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Wood material: gradiente oscuro cálido */
-  background: linear-gradient(180deg, #2C1F13 0%, #1E1409 100%);
+  /* MADERA CÁLIDA: tono medio marrón, no negro */
+  background: linear-gradient(180deg, #6B4423 0%, #4A2D14 50%, #3A2010 100%);
 
-  /* Borde derecho sutil */
-  border-right: 1px solid rgba(255,255,255,0.06);
-
-  /* Sombra ambiente lateral */
-  box-shadow: 4px 0 24px rgba(0,0,0,0.25), inset -1px 0 0 rgba(255,255,255,0.04);
+  /* Efecto madera: highlight lateral izquierdo */
+  box-shadow:
+    4px 0 32px rgba(0,0,0,0.35),
+    inset -1px 0 0 rgba(0,0,0,0.3),
+    inset 1px 0 0 rgba(255,255,255,0.04);
 }
 
 /* ── Logo ── */
 .ff-sidebar-logo {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 20px 14px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 12px;
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-.ff-logo-icon {
+.ff-logo-img {
   flex-shrink: 0;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Superficie 3D wood */
-  background: linear-gradient(145deg, #4A3020, #2C1F13);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.14);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: contain;
+  /* 3D raised wood frame */
+  background: linear-gradient(145deg, #7A5030, #4A2E18);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+  padding: 4px;
 }
 
 .ff-logo-name {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  color: #ECE4DA;
+  color: #F5EDD8;
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .ff-logo-tagline {
-  font-size: 9px;
+  font-size: 10px;
   font-family: var(--font-serif);
   font-style: italic;
-  color: #6B5540;
+  color: #C9A87A;
   line-height: 1.3;
   margin-top: 1px;
 }
@@ -221,145 +217,134 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 11px;
-  border-radius: 12px;
+  margin: 12px 10px 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.18s ease;
 
-  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.07);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+  /* Superficie cerámica oscura — raised panel */
+  background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.ff-avatar-card:hover {
+  background: linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.06));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.14);
 }
 
 .ff-avatar-bubble {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   color: #FEF0CF;
   overflow: hidden;
-
-  /* Gold gradient 3D */
-  background: linear-gradient(145deg, #E5A820, #9A6E10);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,200,50,0.35);
+  /* Gold 3D */
+  background: linear-gradient(145deg, #D4991E, #8A6010);
+  border: 1px solid rgba(255,220,100,0.25);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,210,80,0.4);
 }
 
 .ff-avatar-photo {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   object-fit: cover;
+  border-radius: 10px;
 }
+
+.ff-avatar-info { flex: 1; overflow: hidden; }
 
 .ff-avatar-name {
-  font-size: 11.5px;
+  font-size: 13px;
   font-weight: 600;
-  color: #D4C8B8;
+  color: #F0E6D0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.3;
 }
 
-.ff-avatar-email {
-  font-size: 9.5px;
-  color: #6B5540;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.ff-avatar-role {
+  font-size: 10px;
+  color: #C9A87A;
   line-height: 1.3;
 }
 
-/* ── Separador ── */
-.ff-sidebar-sep {
-  height: 1px;
-  margin: 4px 12px 8px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+/* ── Navegación ── */
+.ff-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 10px 8px;
 }
 
-/* ── Label de sección ── */
-.ff-nav-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #4A3828;
-  padding: 0 6px 6px;
-}
-
-/* ── Nav item ── */
+/* ── Nav item BASE — texto claro sobre madera ── */
 .ff-nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 10px;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
   text-decoration: none;
-  position: relative;
   transition: all 0.18s ease;
-
-  background: transparent;
   border: 1px solid transparent;
+  position: relative;
 }
 
-.ff-nav-item:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  border-color: rgba(255,255,255,0.07);
-  transform: translateY(-1px);
+.ff-nav-item:hover:not(.ff-nav-item--active) {
+  background: rgba(0,0,0,0.15);
+  border-color: rgba(0,0,0,0.1);
 }
 
+/* ── ACTIVO: superficie CREMA que emerge de la madera ── */
 .ff-nav-item--active {
-  /* Superficie cerámica dorada 3D */
-  background: linear-gradient(160deg, rgba(202,147,24,0.22) 0%, rgba(148,98,40,0.14) 100%);
-  border: 1px solid rgba(202,147,24,0.28);
+  /* Cerámica clara — el CONTRASTE con el fondo oscuro crea el 3D */
+  background: linear-gradient(180deg, #F5EDD8 0%, #EAE0C8 100%);
+  border: 1px solid rgba(255,255,255,0.7);
   box-shadow:
-    0 4px 14px rgba(0,0,0,0.2),
-    0 1px 4px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(202,147,24,0.3);
+    0 6px 20px rgba(0,0,0,0.3),
+    0 2px 6px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.92);
   transform: translateY(-1px);
 }
 
 .ff-nav-item--active:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 6px 18px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(202,147,24,0.35);
+    0 8px 24px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.95);
 }
 
-/* ── Icono del nav ── */
-.ff-nav-icon {
+/* ── Ícono SVG ── */
+.ff-nav-icon-svg {
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6B5540;
-  transition: all 0.18s ease;
-
-  /* 3D dark surface */
-  background: linear-gradient(145deg, #3A2818, #251A0E);
-  border: 1px solid rgba(255,255,255,0.07);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.45);
+  transition: color 0.18s;
 }
 
-.ff-nav-icon--active {
-  color: #F2C85F;
-
-  /* Gold 3D surface */
-  background: linear-gradient(145deg, #A07420, #6B4C10);
-  border-color: rgba(242,200,95,0.3);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,200,60,0.35);
+.ff-nav-item--active .ff-nav-icon-svg {
+  color: #7A5030;
 }
 
-.ff-nav-text {
-  font-size: 12.5px;
+.ff-nav-item:hover:not(.ff-nav-item--active) .ff-nav-icon-svg {
+  color: rgba(255,255,255,0.7);
+}
+
+/* ── Label del nav ── */
+.ff-nav-label {
+  font-size: 13px;
   font-weight: 500;
-  color: #907060;
+  color: rgba(255,255,255,0.5);
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -367,189 +352,204 @@
   transition: color 0.18s;
 }
 
-.ff-nav-item--active .ff-nav-text {
-  color: #F2C85F;
-  font-weight: 600;
+.ff-nav-item--active .ff-nav-label {
+  color: #4A2E18;
+  font-weight: 700;
 }
 
-.ff-nav-dot {
-  flex-shrink: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #CA9318;
-  box-shadow: 0 0 6px rgba(202,147,24,0.6);
+.ff-nav-item:hover:not(.ff-nav-item--active) .ff-nav-label {
+  color: rgba(255,255,255,0.8);
+}
+
+/* ── Moneda ── */
+.ff-currency-section {
+  padding: 4px 10px 10px;
+  border-top: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
 /* ── Plan Premium ── */
 .ff-premium-card {
-  margin: 0 10px 10px;
-  padding: 13px 14px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 16px;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 
-  background: linear-gradient(145deg, #3A2818 0%, #251A0E 100%);
-  border: 1px solid rgba(202,147,24,0.22);
+  /* Dark wood raised card */
+  background: linear-gradient(160deg, #5A3820 0%, #3A2210 100%);
+  border: 1px solid rgba(255,255,255,0.10);
   box-shadow:
-    0 8px 24px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(202,147,24,0.2);
+    0 8px 28px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
-/* Highlight superior */
+/* Highlight esquina superior izquierda */
 .ff-premium-card::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(160deg, rgba(202,147,24,0.12), transparent 55%);
   border-radius: inherit;
+  background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, transparent 50%);
 }
 
-.ff-premium-header {
+.ff-premium-inner {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
+.ff-premium-star { color: #CA9318; flex-shrink: 0; }
+
 .ff-premium-title {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  color: #F2C85F;
-  letter-spacing: 0.04em;
+  color: #F5C842;
+  letter-spacing: 0.02em;
 }
 
 .ff-premium-desc {
-  font-size: 9.5px;
-  line-height: 1.45;
-  color: #7A6050;
-  margin: 0 0 10px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #C9A87A;
+  margin: 0 0 12px;
 }
 
 .ff-premium-btn {
   width: 100%;
-  padding: 7px 0;
-  border-radius: 8px;
-  font-size: 11px;
+  padding: 9px 0;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   border: none;
-  position: relative;
+  letter-spacing: 0.02em;
   transition: all 0.15s ease;
-  letter-spacing: 0.03em;
+  position: relative;
 
   /* Gold 3D button */
-  background: linear-gradient(180deg, #D9A020, #A87015);
-  color: #2A1A08;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,200,60,0.4);
+  background: linear-gradient(180deg, #D4991E 0%, #A0700E 100%);
+  color: #2A1608;
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,220,80,0.5),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
 }
 
 .ff-premium-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,200,60,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,220,80,0.6);
 }
 
 .ff-premium-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,200,60,0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 /* ── Hongos decorativos ── */
 .ff-mushroom-strip {
   position: relative;
-  height: 120px;
+  height: 130px;
   flex-shrink: 0;
   overflow: hidden;
+  margin-top: 6px;
 }
 
 .ff-mushroom-moss {
   position: absolute;
   bottom: 0;
-  left: -8px;
-  height: 72px;
+  left: -4px;
+  height: 80px;
   object-fit: contain;
   pointer-events: none;
-  select: none;
-  opacity: 0.75;
-  filter: brightness(0.7);
+  user-select: none;
+  opacity: 0.85;
 }
 
-.ff-mushroom-main {
+.ff-mushroom-center {
   position: absolute;
-  bottom: -4px;
+  bottom: -2px;
   left: 50%;
   transform: translateX(-50%);
-  height: 118px;
+  height: 126px;
   object-fit: contain;
   pointer-events: none;
-  filter: drop-shadow(0 -4px 16px rgba(202,147,24,0.15));
+  user-select: none;
+  filter: drop-shadow(0 -6px 20px rgba(202,147,24,0.2));
 }
 
 .ff-mushroom-right {
   position: absolute;
   bottom: 0;
-  right: -6px;
-  height: 60px;
+  right: -4px;
+  height: 70px;
   object-fit: contain;
   pointer-events: none;
-  opacity: 0.55;
-  filter: brightness(0.65);
+  user-select: none;
+  opacity: 0.75;
 }
 
 /* ── Footer ── */
 .ff-sidebar-footer {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 10px;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(0,0,0,0.25);
   flex-shrink: 0;
 }
 
 .ff-logout-btn {
   display: flex;
   align-items: center;
-  gap: 7px;
-  flex: 1;
-  padding: 7px 8px;
+  gap: 8px;
+  padding: 6px 8px;
   border-radius: 8px;
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 500;
-  color: #5A4535;
+  color: rgba(255,255,255,0.35);
   transition: all 0.15s ease;
 }
 
 .ff-logout-btn:hover {
-  color: #C0392B;
-  background: rgba(192,57,43,0.08);
+  color: #E57373;
+  background: rgba(192,57,43,0.12);
+}
+
+.ff-collapse-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  flex: 1;
+  white-space: nowrap;
 }
 
 .ff-collapse-btn {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.08);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #6B5540;
+  color: rgba(255,255,255,0.5);
   transition: all 0.15s ease;
 
-  background: linear-gradient(145deg, #3A2818, #251A0E);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.07);
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .ff-collapse-btn:hover {
-  color: #CA9318;
-  border-color: rgba(202,147,24,0.25);
+  color: #F5C842;
+  border-color: rgba(202,147,24,0.3);
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,200,60,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
 .ff-collapse-btn:active {
