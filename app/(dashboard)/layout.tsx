@@ -38,7 +38,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="app-shell-3d flex h-screen overflow-hidden">
       <Sidebar />
-      <main className="page-surface flex-1 overflow-y-auto">
+      <main className="page-surface relative flex-1 overflow-y-auto">
+        {/* Decorative corner illustrations — fixed to viewport edges */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/musgo-inferior-izquierda.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none fixed bottom-0 left-0 z-0 w-56 select-none opacity-90"
+          style={{ filter: 'drop-shadow(0 -8px 24px rgba(0,0,0,0.18))' }}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hongo-inferior-derecho.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none fixed bottom-0 right-0 z-0 w-64 select-none opacity-90"
+          style={{ filter: 'drop-shadow(0 -8px 24px rgba(0,0,0,0.18))' }}
+        />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-7 md:px-8 lg:px-10">
           {children}
         </div>

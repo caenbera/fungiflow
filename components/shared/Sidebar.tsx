@@ -144,16 +144,6 @@ export function Sidebar() {
 
       <div className="ff-sidebar-spacer" />
 
-      {!collapsed && (
-        <div className="ff-fungi-zone">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/musgo-inferior-izquierda.png" alt="" className="ff-fungi-moss" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/hongo-inferior-derecho.png" alt="" className="ff-fungi-right" />
-          <div className="ff-fungi-fade" />
-        </div>
-      )}
-
       <div className="ff-footer-section">
         <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesiÃ³n">
           <LogOut size={14} />
