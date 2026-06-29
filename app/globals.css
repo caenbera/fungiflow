@@ -149,10 +149,11 @@
 }
 
 /* ════════════════════════════════════════════
-   SIDEBAR — Ceramic & Wood 3D System
+   SIDEBAR — Soft-3D Wood / Neumorfismo Cálido
+   UNA sola superficie. Todo tallado, nada flotante.
    ════════════════════════════════════════════ */
 
-/* Contenedor principal */
+/* ── SUPERFICIE PRINCIPAL — textura PBR simulada ── */
 .ff-sidebar {
   display: flex;
   flex-direction: column;
@@ -163,397 +164,516 @@
   overflow: hidden;
   transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* MADERA CÁLIDA: tono medio marrón, no negro */
-  background: linear-gradient(180deg, #6B4423 0%, #4A2D14 50%, #3A2010 100%);
+  /* Capa 1: color base madera cálida */
+  background-color: #6A3E1B;
 
-  /* Efecto madera: highlight lateral izquierdo */
+  /* Capa 2: vetas + gradiente vertical + iluminación lateral izquierda */
+  background-image:
+    /* Vetas sutiles horizontales (ruido PBR) */
+    repeating-linear-gradient(
+      91deg,
+      transparent 0px,
+      rgba(0,0,0,0.025) 1px,
+      transparent 2px,
+      transparent 10px
+    ),
+    /* Iluminación lateral izquierda — como luz que golpea la madera */
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.07) 0%,
+      rgba(255,255,255,0.02) 18%,
+      transparent 40%
+    ),
+    /* Gradiente vertical principal */
+    linear-gradient(
+      180deg,
+      #7C4A24 0%,
+      #6A3D1B 40%,
+      #563017 100%
+    );
+
+  /* Sombras multicapa */
   box-shadow:
-    4px 0 32px rgba(0,0,0,0.35),
-    inset -1px 0 0 rgba(0,0,0,0.3),
-    inset 1px 0 0 rgba(255,255,255,0.04);
+    inset 0 2px 1px rgba(255,255,255,0.18),
+    inset 0 -2px 2px rgba(0,0,0,0.18),
+    8px 0 40px rgba(0,0,0,0.25);
 }
 
-/* ── Logo ── */
-.ff-sidebar-logo {
+/* ════════ SECCIONES — flujo continuo, sin cards flotantes ════════ */
+
+/* Bloque genérico de sección */
+.ff-section {
+  padding: 14px 16px;
+}
+
+/* Divisor interno — tallado en la madera */
+.ff-divider {
+  height: 1px;
+  margin: 0 16px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0,0,0,0.35) 20%,
+    rgba(0,0,0,0.35) 80%,
+    transparent
+  );
+  /* Highlight superior del divisor = efecto grabado */
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* ════════ LOGO ════════ */
+.ff-logo-section {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 16px 14px;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding: 18px 16px 16px;
+}
+
+.ff-logo-icon-wrap {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+
+  /* Cavidad tallada hacia adentro */
+  background: linear-gradient(145deg, #4A2810, #7A4820);
+  border: 1px solid rgba(0,0,0,0.3);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.4),
+    inset 0 -1px 2px rgba(255,255,255,0.06),
+    0 1px 0 rgba(255,255,255,0.1);
 }
 
 .ff-logo-img {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
-  /* 3D raised wood frame */
-  background: linear-gradient(145deg, #7A5030, #4A2E18);
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18);
-  padding: 4px;
+  border-radius: 6px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+
+.ff-logo-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .ff-logo-name {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   color: #F5EDD8;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
-.ff-logo-tagline {
-  font-size: 10px;
+.ff-logo-sub {
+  font-size: 9.5px;
   font-family: var(--font-serif);
   font-style: italic;
   color: #C9A87A;
   line-height: 1.3;
-  margin-top: 1px;
 }
 
-/* ── Avatar ── */
-.ff-avatar-card {
+/* ════════ USUARIO — cavidad tallada ════════ */
+.ff-user-section {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 12px 10px 8px;
+  margin: 0 10px;
   padding: 10px 12px;
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.18s ease;
 
-  /* Superficie cerámica oscura — raised panel */
-  background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
-  border: 1px solid rgba(255,255,255,0.10);
+  /* Cavidad: más oscuro + borde superior iluminado */
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.10));
+  border: 1px solid rgba(0,0,0,0.25);
   box-shadow:
-    0 4px 16px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.12);
+    inset 0 2px 4px rgba(0,0,0,0.25),
+    inset 0 -1px 2px rgba(255,255,255,0.05),
+    0 1px 0 rgba(255,255,255,0.08);
 }
 
-.ff-avatar-card:hover {
-  background: linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.06));
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.14);
+.ff-user-section:hover {
+  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));
 }
 
-.ff-avatar-bubble {
+.ff-user-avatar {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+
+  /* Marco dorado 3D */
+  background: linear-gradient(145deg, #C8900E, #7A5508);
+  border: 1px solid rgba(255,210,80,0.3);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,200,60,0.5);
+}
+
+.ff-user-photo {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+}
+
+.ff-user-initials {
+  font-size: 14px;
   font-weight: 700;
   color: #FEF0CF;
-  overflow: hidden;
-  /* Gold 3D */
-  background: linear-gradient(145deg, #D4991E, #8A6010);
-  border: 1px solid rgba(255,220,100,0.25);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,210,80,0.4);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
-.ff-avatar-photo {
-  width: 36px;
-  height: 36px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+.ff-user-info { flex: 1; overflow: hidden; }
 
-.ff-avatar-info { flex: 1; overflow: hidden; }
-
-.ff-avatar-name {
+.ff-user-name {
+  display: block;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: #F0E6D0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-.ff-avatar-role {
+.ff-user-role {
+  display: block;
   font-size: 10px;
   color: #C9A87A;
   line-height: 1.3;
 }
 
-/* ── Navegación ── */
-.ff-nav {
+.ff-user-chevron { color: #C9A87A; flex-shrink: 0; }
+
+/* ════════ NAVEGACIÓN ════════ */
+.ff-nav-section {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 12px 10px 8px;
+  gap: 3px;
+  padding: 10px 10px;
 }
 
-/* ── Nav item BASE — texto claro sobre madera ── */
+/* Item base — texto sobre madera */
 .ff-nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
-  border-radius: 12px;
+  gap: 11px;
+  padding: 10px 13px;
+  border-radius: 10px;
   text-decoration: none;
-  transition: all 0.18s ease;
+  transition: all 0.16s ease;
   border: 1px solid transparent;
-  position: relative;
 }
 
 .ff-nav-item:hover:not(.ff-nav-item--active) {
-  background: rgba(0,0,0,0.15);
-  border-color: rgba(0,0,0,0.1);
+  background: rgba(0,0,0,0.14);
+  border-color: rgba(0,0,0,0.12);
 }
 
-/* ── ACTIVO: superficie CREMA que emerge de la madera ── */
+/* ── ACTIVO — porcelana emergiendo de la madera ── */
 .ff-nav-item--active {
-  /* Cerámica clara — el CONTRASTE con el fondo oscuro crea el 3D */
-  background: linear-gradient(180deg, #F5EDD8 0%, #EAE0C8 100%);
-  border: 1px solid rgba(255,255,255,0.7);
+  background: linear-gradient(180deg, #FBF6EC 0%, #EDE5D2 100%);
+  border: 1px solid rgba(255,255,255,0.82);
   box-shadow:
-    0 6px 20px rgba(0,0,0,0.3),
-    0 2px 6px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.92);
-  transform: translateY(-1px);
+    0 2px 3px rgba(255,255,255,0.18) inset,
+    0 -2px 3px rgba(0,0,0,0.18) inset,
+    0 12px 24px rgba(70,35,10,0.18),
+    0 2px 6px rgba(0,0,0,0.12);
 }
 
 .ff-nav-item--active:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow:
-    0 8px 24px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.95);
+    0 2px 3px rgba(255,255,255,0.22) inset,
+    0 -2px 3px rgba(0,0,0,0.15) inset,
+    0 16px 28px rgba(70,35,10,0.2),
+    0 4px 8px rgba(0,0,0,0.14);
 }
 
-/* ── Ícono SVG ── */
-.ff-nav-icon-svg {
+/* Ícono contenedor 3D */
+.ff-nav-icon {
   flex-shrink: 0;
-  color: rgba(255,255,255,0.45);
-  transition: color 0.18s;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.16s ease;
+
+  /* Estado inactivo: cavidad oscura */
+  background: linear-gradient(145deg, #3E2210, #5A3018);
+  border: 1px solid rgba(0,0,0,0.3);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.35),
+    inset 0 -1px 1px rgba(255,255,255,0.04),
+    0 1px 0 rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.4);
 }
 
-.ff-nav-item--active .ff-nav-icon-svg {
-  color: #7A5030;
+/* Ícono activo: relieve dorado */
+.ff-nav-icon--active {
+  background: linear-gradient(145deg, #C8900E, #7A5508);
+  border: 1px solid rgba(255,200,60,0.35);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.35),
+    0 1px 3px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,215,70,0.55);
+  color: #FEF0CF;
 }
 
-.ff-nav-item:hover:not(.ff-nav-item--active) .ff-nav-icon-svg {
-  color: rgba(255,255,255,0.7);
-}
-
-/* ── Label del nav ── */
 .ff-nav-label {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.48);
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.18s;
+  transition: color 0.16s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
 .ff-nav-item--active .ff-nav-label {
-  color: #4A2E18;
+  color: #3D2008;
   font-weight: 700;
+  text-shadow: none;
 }
 
 .ff-nav-item:hover:not(.ff-nav-item--active) .ff-nav-label {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.72);
 }
 
-/* ── Moneda ── */
-.ff-currency-section {
-  padding: 4px 10px 10px;
-  border-top: 1px solid rgba(0,0,0,0.2);
-  border-bottom: 1px solid rgba(0,0,0,0.2);
-}
-
-/* ── Plan Premium ── */
-.ff-premium-card {
-  padding: 14px;
-  border-radius: 16px;
+/* ════════ PLAN PREMIUM ════════ */
+.ff-premium-section {
+  margin: 0 10px;
+  padding: 13px 14px;
+  border-radius: 14px;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0;
 
-  /* Dark wood raised card */
-  background: linear-gradient(160deg, #5A3820 0%, #3A2210 100%);
-  border: 1px solid rgba(255,255,255,0.10);
+  /* Cavidad profunda con reflejo en borde superior */
+  background: linear-gradient(160deg, #3A2010 0%, #2A1608 100%);
+  border: 1px solid rgba(0,0,0,0.35);
   box-shadow:
-    0 8px 28px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.12);
+    inset 0 2px 6px rgba(0,0,0,0.4),
+    inset 0 -1px 3px rgba(255,255,255,0.05),
+    0 1px 0 rgba(255,255,255,0.08),
+    0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* Highlight esquina superior izquierda */
-.ff-premium-card::before {
+/* Reflejo dorado diagonal */
+.ff-premium-section::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0; left: 0; right: 0;
+  height: 40%;
   pointer-events: none;
-  border-radius: inherit;
-  background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, transparent 50%);
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(
+    135deg,
+    rgba(202,147,24,0.10) 0%,
+    transparent 60%
+  );
 }
 
-.ff-premium-inner {
+.ff-premium-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
+  position: relative;
 }
 
-.ff-premium-star { color: #CA9318; flex-shrink: 0; }
+.ff-premium-star { color: #D4A020; flex-shrink: 0; }
 
 .ff-premium-title {
   font-size: 12px;
   font-weight: 700;
   color: #F5C842;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .ff-premium-desc {
   font-size: 10px;
   line-height: 1.5;
-  color: #C9A87A;
-  margin: 0 0 12px;
+  color: #B8905A;
+  margin: 0 0 11px;
+  position: relative;
 }
 
 .ff-premium-btn {
   width: 100%;
   padding: 9px 0;
-  border-radius: 10px;
+  border-radius: 9px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   border: none;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   transition: all 0.15s ease;
   position: relative;
 
-  /* Gold 3D button */
-  background: linear-gradient(180deg, #D4991E 0%, #A0700E 100%);
-  color: #2A1608;
+  /* Botón dorado 3D */
+  background: linear-gradient(180deg, #D9A320 0%, #9A7010 100%);
+  color: #2A1206;
   box-shadow:
-    0 4px 14px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,220,80,0.5),
-    inset 0 -1px 0 rgba(0,0,0,0.2);
+    0 4px 12px rgba(0,0,0,0.4),
+    0 1px 3px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,225,80,0.55),
+    inset 0 -1px 0 rgba(0,0,0,0.25);
 }
 
 .ff-premium-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,220,80,0.6);
+  box-shadow:
+    0 7px 18px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,225,80,0.65);
 }
 
 .ff-premium-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow:
+    0 1px 4px rgba(0,0,0,0.4),
+    inset 0 2px 5px rgba(0,0,0,0.25);
 }
 
-/* ── Hongos decorativos ── */
-.ff-mushroom-strip {
+/* ════════ HONGOS — zona integrada en la superficie ════════ */
+.ff-fungi-zone {
   position: relative;
-  height: 130px;
+  width: 100%;
+  height: 136px;
   flex-shrink: 0;
   overflow: hidden;
-  margin-top: 6px;
 }
 
-.ff-mushroom-moss {
+/* Fade superior: la imagen se funde con la madera */
+.ff-fungi-fade {
   position: absolute;
-  bottom: 0;
-  left: -4px;
-  height: 80px;
+  top: 0; left: 0; right: 0;
+  height: 48px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    #563017 0%,      /* color exacto del sidebar en esa zona */
+    transparent 100%
+  );
+  z-index: 2;
+}
+
+.ff-fungi-moss {
+  position: absolute;
+  bottom: 0; left: -6px;
+  height: 88px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-  opacity: 0.85;
+  z-index: 1;
 }
 
-.ff-mushroom-center {
+.ff-fungi-center {
   position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 126px;
+  bottom: -4px;
+  left: 50%; transform: translateX(-50%);
+  height: 132px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0 -6px 20px rgba(202,147,24,0.2));
+  z-index: 1;
+  filter: drop-shadow(0 -4px 16px rgba(180,120,30,0.25));
 }
 
-.ff-mushroom-right {
+.ff-fungi-right {
   position: absolute;
-  bottom: 0;
-  right: -4px;
-  height: 70px;
+  bottom: 0; right: -4px;
+  height: 76px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-  opacity: 0.75;
+  z-index: 1;
+  opacity: 0.8;
 }
 
-/* ── Footer ── */
-.ff-sidebar-footer {
+/* ════════ FOOTER ════════ */
+.ff-footer-section {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 12px;
-  border-top: 1px solid rgba(0,0,0,0.25);
+  padding: 10px 14px;
   flex-shrink: 0;
+
+  /* Línea superior tallada */
+  border-top: 1px solid rgba(0,0,0,0.35);
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.06);
 }
 
 .ff-logout-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
-  border: none;
-  background: transparent;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: linear-gradient(145deg, #3E2210, #5A3018);
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.06);
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
   color: rgba(255,255,255,0.35);
   transition: all 0.15s ease;
+  flex-shrink: 0;
 }
 
 .ff-logout-btn:hover {
   color: #E57373;
-  background: rgba(192,57,43,0.12);
+  border-color: rgba(192,57,43,0.3);
 }
 
 .ff-collapse-label {
-  font-size: 11px;
-  color: rgba(255,255,255,0.35);
   flex: 1;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
   white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .ff-collapse-btn {
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
   transition: all 0.15s ease;
 
-  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(0,0,0,0.1));
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .ff-collapse-btn:hover {
   color: #F5C842;
-  border-color: rgba(202,147,24,0.3);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  border-color: rgba(202,147,24,0.35);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,200,60,0.2);
 }
 
 .ff-collapse-btn:active {
   transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 @layer utilities {
