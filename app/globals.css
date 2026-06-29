@@ -578,101 +578,158 @@
 }
 
 
-/* =====================================
+/* ==========================================================
    SIDEBAR 3.0
-   ===================================== */
+   MATERIAL SHELL
+   ========================================================== */
 
-/* ── 1. SIDEBAR SHELL ── */
 .ff-sidebar {
   position: relative;
-  isolation: isolate;
-  height: calc(100vh - 32px);
-  min-height: 680px;
-  margin: 16px 0 16px 16px;
-  padding: 0;
-  border-radius: var(--ff-border-radius-xl);
+  width: 312px;
+  height: 100vh;
   overflow: hidden;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  transition:
-    width var(--ff-transition-slow) var(--ff-easing),
-    border-radius var(--ff-transition-slow) var(--ff-easing);
+  isolation: isolate;
+  border-radius: 34px;
 
-  /* Layer 1: Material Base */
-  background-color: var(--ff-surface-3);
-
-  /* Layer 2: Wood Texture (simulated grain + vertical depth) */
-  background-image:
-    repeating-linear-gradient(112deg, rgba(255,255,255,.028) 0 1px, transparent 1px 10px),
-    repeating-linear-gradient( 24deg, rgba(  0,  0,  0,.035) 0 1px, transparent 1px 14px),
-    linear-gradient(180deg,
-      var(--ff-material-wood-800)  0%,
-      var(--ff-material-wood-600) 36%,
-      var(--ff-material-wood-700) 68%,
-      var(--ff-material-wood-900) 100%
+  /* ---------- MATERIAL BASE ---------- */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(72,42,18,.90)  0%,
+      rgba(58,33,15,.96) 18%,
+      rgba(70,39,18,.98) 52%,
+      rgba(55,31,14,1)  100%
     );
 
-  /* Layer 5: Shadow — elevation-3 */
+  border: 1px solid rgba(70,42,18,.45);
+
+  /* ---------- PROFUNDIDAD ---------- */
   box-shadow:
-    var(--ff-shadow-3),
-    var(--ff-shadow-inner);
+    /* sombra proyectada */
+    0 28px 60px rgba(18,9,3,.42),
+    0 12px 22px rgba(28,14,5,.30),
+    /* AO */
+    inset 0 0 0 1px rgba(255,240,210,.05),
+    inset 0 -18px 30px rgba(0,0,0,.25),
+    inset 0 18px 18px rgba(255,220,180,.035);
+
+  /* keep flex layout for content */
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition:
+    width 0.26s cubic-bezier(.22,.61,.36,1),
+    border-radius 0.26s cubic-bezier(.22,.61,.36,1);
 }
 
-/* Layer 6: Premium Border — conic-gradient following 325° key light */
+/* ==========================================================
+   WOOD TEXTURE
+   ========================================================== */
+
 .ff-sidebar::before {
   content: "";
   position: absolute;
-  inset: -1.5px;
-  border-radius: calc(var(--ff-border-radius-xl) + 1.5px);
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: url("https://i.postimg.cc/GmQsf9J6/textura-madera.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .18;
+  mix-blend-mode: soft-light;
+  filter: contrast(112%) brightness(.95) saturate(.95);
   pointer-events: none;
-  z-index: -2;
-  background: conic-gradient(
-    from -38deg at 97% 2%,
-    var(--ff-border-highlight)       0deg  18deg,
-    var(--ff-border-light)          18deg  75deg,
-    var(--ff-border-base)           75deg 148deg,
-    var(--ff-border-shadow)        148deg 262deg,
-    rgba(110, 68, 24, .48)         262deg 318deg,
-    var(--ff-border-highlight)     318deg 360deg
-  );
 }
 
-/* Layer 3: Lighting + Layer 4: Reflection */
+/* ==========================================================
+   LIGHT ENGINE
+   ========================================================== */
+
 .ff-sidebar::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  z-index: 1;
   pointer-events: none;
-  z-index: 0;
   background:
-    var(--ff-specular-highlight),
-    var(--ff-reflection-warm-layer),
-    var(--ff-lighting-key),
-    var(--ff-lighting-fill),
-    var(--ff-lighting-rim),
-    var(--ff-lighting-bounce),
-    var(--ff-lighting-ao);
-  mix-blend-mode: soft-light;
+    /* KEY LIGHT */
+    radial-gradient(
+      circle at 92% 2%,
+      rgba(255,244,223,.82)  0%,
+      rgba(255,233,198,.34) 11%,
+      rgba(255,228,188,.08) 22%,
+      transparent           42%
+    ),
+    /* FILL LIGHT */
+    linear-gradient(
+      180deg,
+      rgba(255,246,224,.11),
+      transparent 24%
+    ),
+    /* RIM RIGHT */
+    linear-gradient(
+      90deg,
+      transparent           78%,
+      rgba(255,219,170,.18) 96%,
+      rgba(255,240,215,.28) 100%
+    ),
+    /* TOP RIM */
+    linear-gradient(
+      180deg,
+      rgba(255,236,208,.22),
+      transparent 8%
+    ),
+    /* AO */
+    linear-gradient(
+      0deg,
+      rgba(0,0,0,.22),
+      transparent 18%
+    );
 }
 
-/* Content always above material layers */
+/* Content above material layers */
 .ff-sidebar > * {
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 
-/* Inner rim — brightens just inside the border edge at top-right */
-.ff-sidebar-glow {
+/* ==========================================================
+   FRAME  (copper border — first child of sidebar)
+   ========================================================== */
+
+.ff-sidebar-frame {
   position: absolute;
-  inset: 1px;
-  border-radius: calc(var(--ff-border-radius-xl) - 1px);
+  inset: 0;
   pointer-events: none;
-  z-index: 0;
+  border-radius: 34px;
+  z-index: 2;
   box-shadow:
-    inset -1px  1px 0 rgba(255, 228, 158, .28),
-    inset  1px -1px 0 rgba( 10,   3,   1, .22);
+    /* cobre iluminado */
+    inset 2px  2px 0   rgba(255,231,194,.70),
+    /* cobre lateral */
+    inset 4px  0   8px rgba(255,211,160,.26),
+    /* cobre inferior */
+    inset -2px -3px 0  rgba(66,34,14,.65),
+    /* sombra */
+    0 10px 24px rgba(0,0,0,.22);
+}
+
+/* ==========================================================
+   AMBIENT OCCLUSION  (second decorative child)
+   ========================================================== */
+
+.ff-sidebar-ao {
+  position: absolute;
+  inset: 12px;
+  border-radius: 28px;
+  pointer-events: none;
+  z-index: 3;
+  box-shadow:
+    inset 0  0   0  1px rgba(255,248,235,.03),
+    inset 0 -10px 20px rgba(0,0,0,.22),
+    inset 0  12px 12px rgba(255,244,223,.03);
 }
 
 .ff-sidebar--collapsed {

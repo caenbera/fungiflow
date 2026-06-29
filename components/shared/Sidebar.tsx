@@ -61,9 +61,10 @@ export function Sidebar() {
   const visibleItems = NAV_ITEMS.filter((item) => !item.compactOnly || pathname.startsWith('/calculadoras'));
 
   return (
-    <aside className={collapsed ? 'ff-sidebar ff-sidebar--collapsed' : 'ff-sidebar'} style={{ width: collapsed ? 78 : 252 }}>
-      {/* Decoration layer — visual only, no content */}
-      <div className="ff-sidebar-glow" aria-hidden="true" />
+    <aside className={collapsed ? 'ff-sidebar ff-sidebar--collapsed' : 'ff-sidebar'} style={{ width: collapsed ? 78 : 312 }}>
+      {/* Material Shell decoration — visual only */}
+      <div className="ff-sidebar-frame" aria-hidden="true" />
+      <div className="ff-sidebar-ao" aria-hidden="true" />
 
       {/* Header — fixed */}
       <div className="ff-sidebar-header">
