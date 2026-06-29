@@ -202,6 +202,30 @@
   --ff-border-inner-highlight: inset 0  1px 0   rgba(255, 255, 255, .12);
   --ff-border-inner-shadow:    inset 0 -2px 3px rgba( 47,  22,  10, .18);
 
+  /* ME-06 · Reflection Engine — satin/varnish finish, never replaces ME-03 lighting */
+  /* Layer order: Material → Lighting → Reflection → Shadows → Border */
+
+  /* Opacity scale */
+  --ff-reflection-opacity-soft:   .04;
+  --ff-reflection-opacity-medium: .08;
+  --ff-reflection-opacity-strong: .14;
+
+  /* Reflection colors */
+  --ff-reflection-light: rgba(255, 255, 255, .12);
+  --ff-reflection-warm:  rgba(255, 242, 214, .10);
+  --ff-reflection-gold:  rgba(226, 192, 154, .08);
+
+  /* Reflection levels */
+  --ff-reflection-1: linear-gradient(180deg, rgba(255,255,255,.04), transparent 28%); /* matte — inputs, cards */
+  --ff-reflection-2: linear-gradient(180deg, rgba(255,255,255,.08), transparent 24%); /* satin — sidebar, premium */
+  --ff-reflection-3: linear-gradient(180deg, rgba(255,255,255,.14), transparent 18%); /* gloss — active item, button */
+
+  /* Specular highlight — concentrated glint at key light origin */
+  --ff-specular-highlight: radial-gradient(circle at 98% 2%, rgba(255,255,255,.22), transparent 20%);
+
+  /* Warm reflection — material warmth (wood/porcelain) */
+  --ff-reflection-warm-layer: linear-gradient(135deg, rgba(255,240,210,.06), transparent 42%);
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
