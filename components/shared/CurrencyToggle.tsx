@@ -6,23 +6,34 @@ import type { Currency } from '@/types';
 
 const CURRENCIES: Currency[] = ['COP', 'USD', 'EUR', 'GBP'];
 
-export function CurrencyToggle() {
+export function CurrencyToggle({ dark = false }: { dark?: boolean }) {
   const { currency, setCurrency, loading } = useCurrencyStore();
 
   return (
-    <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+    <div
+      className="flex items-center gap-0.5 rounded-lg p-1 flex-wrap"
+      style={dark
+        ? { background: 'rgba(255,255,255,0.06)' }
+        : { background: 'var(--muted)' }
+      }
+    >
       {CURRENCIES.map((c) => {
         const { label } = CURRENCY_META[c];
+        const active = currency === c;
         return (
           <button
             key={c}
             onClick={() => setCurrency(c)}
             disabled={loading}
-            className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-semibold transition-all ${
-              currency === c
-                ? 'bg-white dark:bg-zinc-800 shadow text-foreground'
-                : 'text-muted-foreground hover:text-foreground'
-            }`}
+            className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold transition-all"
+            style={active
+              ? dark
+                ? { background: 'rgba(202,147,24,0.2)', color: '#F2C85F', boxShadow: 'inset 0 0 0 1px rgba(202,147,24,0.3)' }
+                : { background: 'white', color: 'var(--foreground)', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }
+              : dark
+                ? { color: '#907966' }
+                : { color: 'var(--muted-foreground)' }
+            }
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

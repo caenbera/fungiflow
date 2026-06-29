@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
+import { Inter, Fraunces } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/components/shared/AuthProvider';
 import { Toaster } from '@/components/ui/sonner';
 
-const geist = Geist({ variable: '--font-geist', subsets: ['latin'] });
+const inter = Inter({
+  variable: '--font-sans',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const fraunces = Fraunces({
+  variable: '--font-serif',
+  subsets: ['latin'],
+  display: 'swap',
+  style: ['normal', 'italic'],
+  weight: ['300', '400', '600'],
+});
 
 export const metadata: Metadata = {
   title: 'FungiFlow — Gestiona el ritmo de tu cultivo',
@@ -14,7 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${geist.variable} font-sans bg-background text-foreground min-h-screen antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} bg-background text-foreground min-h-screen antialiased`}>
         <AuthProvider>
           {children}
           <Toaster richColors position="top-right" />
