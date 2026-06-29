@@ -294,6 +294,24 @@
   /* Allowed motion: translateY, opacity, box-shadow, background, border-color ONLY */
   /* Forbidden: scale(), rotate(), bounce, elastic, spring, pulse */
 
+  /* ME-10 · Implementation — z-index hierarchy and architecture rules */
+
+  --ff-z-background:  0;
+  --ff-z-material:    1;
+  --ff-z-lighting:    2;
+  --ff-z-reflection:  3;
+  --ff-z-border:      4;
+  --ff-z-content:     5;
+  --ff-z-overlay:    10;
+
+  /* Layer composition order (never alter):
+     Material → Texture → Lighting → Reflection → Shadow → Elevation → Border → Interaction
+     Sidebar pseudo-elements:
+       ::before  → Lighting + Reflection
+       ::after   → Premium Border
+     Scroll architecture:
+       Header (fixed) → Scroll Area (overflow-y: auto, scrollbar: none) → Footer (fixed) */
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
