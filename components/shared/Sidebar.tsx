@@ -145,13 +145,14 @@ export function Sidebar() {
       <div className="ff-sidebar-spacer" />
 
       <div className="ff-footer-section">
-        <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesiÃ³n">
+        <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesión">
           <LogOut size={14} />
+          {!collapsed && <span>Salir</span>}
         </button>
-        <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menÃº'}>
+        <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menú'}>
           {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+          {!collapsed && <span>Colapsar menú</span>}
         </button>
-        {!collapsed && <span className="ff-collapse-label">Colapsar menÃº</span>}
       </div>
     </aside>
   );

@@ -846,49 +846,59 @@
   flex-direction: column;
   transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.28s ease;
   background-color: #5c3319;
+  /* Top is darker — light comes from top-right not top-center */
   background-image:
-    radial-gradient(80% 52% at 16% 0%, rgba(230, 171, 104, 0.20), transparent 58%),
-    radial-gradient(80% 60% at 92% 18%, rgba(38, 16, 7, 0.24), transparent 62%),
-    repeating-linear-gradient(112deg, rgba(255,255,255,0.032) 0 1px, transparent 1px 10px),
+    radial-gradient(70% 38% at 88% 4%, rgba(230, 178, 105, 0.18), transparent 55%),
+    radial-gradient(80% 60% at 92% 18%, rgba(28, 10, 3, 0.28), transparent 62%),
+    repeating-linear-gradient(112deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 10px),
     repeating-linear-gradient(24deg, rgba(0,0,0,0.035) 0 1px, transparent 1px 14px),
-    linear-gradient(90deg, rgba(255, 214, 149, 0.15), transparent 18%, rgba(0,0,0,0.14) 100%),
-    linear-gradient(180deg, #7a4924 0%, #5b3218 48%, #3d1d0d 100%);
-  border: 1px solid rgba(229, 173, 105, 0.75);
+    linear-gradient(180deg, #3d1f0e 0%, #5b3218 36%, #4a2914 68%, #3a1c0c 100%);
+  border: none;
   box-shadow:
-    13px 16px 34px rgba(28, 14, 6, 0.34),
+    14px 18px 38px rgba(20, 8, 2, 0.42),
     4px 7px 12px rgba(28, 14, 6, 0.22),
-    inset 0 2px 1px rgba(255, 220, 168, 0.38),
-    inset 0 -4px 8px rgba(24, 9, 3, 0.35),
-    inset 6px 0 14px rgba(255, 194, 117, 0.10),
-    inset -8px 0 16px rgba(32, 12, 4, 0.26);
+    /* interior: top darker, bottom shadow */
+    inset 0 22px 38px rgba(12, 4, 1, 0.36),
+    inset 0 -6px 12px rgba(18, 6, 1, 0.30);
 }
 
-.ff-sidebar::before,
+/* Gradient border — light from top-right, dark at bottom */
+.ff-sidebar::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 35.5px;
+  pointer-events: none;
+  z-index: -2;
+  background: conic-gradient(
+    from -38deg at 97% 2%,
+    rgba(255, 242, 182, 0.92) 0deg 18deg,    /* top-right corner: brightest */
+    rgba(235, 188, 118, 0.70) 18deg 75deg,   /* right edge upper: warm gold */
+    rgba(175, 115, 52, 0.52) 75deg 118deg,   /* right edge lower: medium */
+    rgba(30, 10, 3, 0.80) 118deg 148deg,     /* bottom-right: dark shadow corner */
+    rgba(18, 6, 1, 0.85) 148deg 212deg,      /* bottom edge: very dark, shadow below */
+    rgba(28, 10, 3, 0.68) 212deg 262deg,     /* left edge: dark */
+    rgba(110, 68, 24, 0.48) 262deg 318deg,   /* top-left: medium-dark */
+    rgba(255, 242, 182, 0.92) 318deg 360deg  /* back to top-right */
+  );
+}
+
+/* Interior surface overlay: adds 3D depth inside */
 .ff-sidebar::after {
   content: "";
   position: absolute;
-  inset: 5px;
-  border-radius: 29px;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.ff-sidebar::before {
-  border: 1px solid rgba(255, 205, 139, 0.22);
-  box-shadow:
-    inset 0 0 0 1px rgba(67, 34, 16, 0.46),
-    inset 0 18px 26px rgba(255, 205, 139, 0.08),
-    inset 0 -16px 22px rgba(21, 8, 2, 0.28);
-}
-
-.ff-sidebar::after {
   inset: 0;
   border-radius: 34px;
-  background:
-    linear-gradient(120deg, rgba(255,255,255,0.18), transparent 16%, transparent 78%, rgba(0,0,0,0.20)),
-    radial-gradient(120% 68% at 50% 105%, rgba(0,0,0,0.22), transparent 50%);
-  mix-blend-mode: soft-light;
+  pointer-events: none;
   z-index: 0;
+  background:
+    /* Top-right inner highlight — where light enters */
+    radial-gradient(55% 30% at 88% 0%, rgba(255, 220, 155, 0.14), transparent 60%),
+    /* Bottom inner shadow — adds depth */
+    radial-gradient(100% 52% at 50% 108%, rgba(10, 3, 1, 0.28), transparent 55%),
+    /* Diagonal soft-light pass */
+    linear-gradient(130deg, rgba(255,255,255,0.10), transparent 22%, transparent 76%, rgba(0,0,0,0.18));
+  mix-blend-mode: soft-light;
 }
 
 .ff-sidebar > * {
@@ -896,16 +906,16 @@
   z-index: 1;
 }
 
+/* Thin inner rim — brightens just inside the border edge at top-right */
 .ff-sidebar-glow {
   position: absolute;
-  inset: -1px;
-  border-radius: inherit;
+  inset: 1px;
+  border-radius: 33px;
   pointer-events: none;
   z-index: 0;
   box-shadow:
-    inset 2px 0 0 rgba(245, 181, 104, 0.50),
-    inset -2px 0 0 rgba(30, 11, 3, 0.28),
-    0 0 0 1px rgba(85, 41, 15, 0.38);
+    inset -1px 1px 0 rgba(255, 228, 158, 0.28),   /* top-right inner rim */
+    inset 1px -1px 0 rgba(10, 3, 1, 0.22);          /* bottom-left inner shadow */
 }
 
 .ff-sidebar--collapsed {
@@ -1045,6 +1055,20 @@
   flex-direction: column;
   gap: 6px;
   padding: 0 8px 10px;
+  /* Scrollable — items slide under the logo divider, no visible scrollbar */
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Fade-out at top so items melt into the divider line */
+  mask-image: linear-gradient(to bottom, transparent 0px, black 14px, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 14px, black 100%);
+}
+
+.ff-nav-section::-webkit-scrollbar {
+  display: none;
 }
 
 .ff-nav-item {
@@ -1289,50 +1313,56 @@
 }
 
 .ff-footer-section {
-  min-height: 42px;
   margin: 0 -10px -12px;
-  padding: 9px 12px 10px;
+  padding: 8px 12px 12px;
   border-radius: 0 0 32px 32px;
   border-top: 1px solid rgba(24, 8, 2, 0.42);
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
   background: rgba(45, 18, 7, 0.22);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 .ff-logout-btn,
 .ff-collapse-btn {
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: 34px;
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  gap: 8px;
+  border-radius: 11px;
   color: rgba(255, 229, 190, 0.64);
-  border: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,0,0,0.20));
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,0,0,0.18));
   box-shadow:
-    0 5px 9px rgba(0,0,0,0.22),
-    inset 0 1px 0 rgba(255,255,255,0.10);
+    0 4px 8px rgba(0,0,0,0.20),
+    inset 0 1px 0 rgba(255,255,255,0.08);
   cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
 }
 
 .ff-logout-btn:hover {
   color: #ff9a8c;
+  border-color: rgba(255, 154, 140, 0.20);
 }
 
 .ff-collapse-btn:hover {
   color: #ffd35e;
-  border-color: rgba(255, 211, 94, 0.28);
+  border-color: rgba(255, 211, 94, 0.22);
 }
 
-.ff-collapse-label {
-  color: rgba(255, 237, 209, 0.72);
-  font-size: 12px;
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+/* When sidebar is collapsed: icon-only, circular */
+.ff-sidebar--collapsed .ff-logout-btn,
+.ff-sidebar--collapsed .ff-collapse-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-self: center;
 }
 
 .ff-sidebar--collapsed .ff-logo-section,
