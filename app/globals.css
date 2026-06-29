@@ -59,6 +59,49 @@
   --ff-material-neutral-500: #5A554F;
   --ff-material-neutral-600: #2F2B28;
 
+  /* ME-02 · Color Engine */
+
+  /* Surface levels */
+  --ff-surface-1: var(--ff-material-cream-50);   /* light backgrounds */
+  --ff-surface-2: var(--ff-material-cream-100);  /* cards, inputs, selects, tables */
+  --ff-surface-3: var(--ff-material-wood-600);   /* sidebar, dark cards, footer */
+  --ff-surface-4: var(--ff-material-wood-800);   /* sidebar header, premium panels */
+
+  /* Accent colors */
+  --ff-accent-primary:   var(--ff-material-gold-300);    /* primary button, active, premium */
+  --ff-accent-secondary: var(--ff-material-copper-200);  /* borders, separators, secondary icons */
+  --ff-accent-success:   var(--ff-material-olive-300);   /* progress, positive states, charts */
+  --ff-accent-danger:    var(--ff-material-danger-300);  /* delete, errors, alerts */
+
+  /* Typography */
+  --ff-text-primary:   #2B1B10;   /* titles, dashboard, buttons */
+  --ff-text-secondary: #705E4B;   /* descriptions, subtitles, aux text */
+  --ff-text-light:     #FFFFFF;   /* sidebar, premium, dark backgrounds */
+  --ff-text-muted:     #A09284;   /* placeholders, disabled, secondary info */
+
+  /* Border materials (physical border defined in ME-05) */
+  --ff-border-light:  rgba(255, 255, 255, 0.18);
+  --ff-border-medium: rgba(132,  88,  42, 0.28);
+  --ff-border-dark:   rgba( 45,  24,  10, 0.35);
+
+  /* Dividers */
+  --ff-divider-light: rgba(255, 255, 255, 0.12);
+  --ff-divider-dark:  rgba( 70,  42,  18, 0.25);
+
+  /* Icon colors */
+  --ff-icon-primary: var(--ff-text-primary);
+  --ff-icon-light:   var(--ff-text-light);
+  --ff-icon-accent:  var(--ff-material-gold-300);
+  --ff-icon-muted:   var(--ff-text-muted);
+
+  /* Interaction states */
+  --ff-state-active-bg:    var(--ff-material-cream-100);
+  --ff-state-active-color: var(--ff-text-primary);
+  --ff-state-hover-bg:     var(--ff-material-cream-200);
+  --ff-state-selected-bg:  var(--ff-material-gold-200);
+  --ff-state-disabled-bg:  var(--ff-material-neutral-200);
+  --ff-state-disabled-color: var(--ff-text-muted);
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
@@ -68,33 +111,33 @@
   --danger-500: var(--ff-material-danger-400);
   --danger-100: var(--ff-material-danger-100);
 
-  /* Semantic tokens → shadcn mapping */
-  --background:         #F6F3EE;
-  --foreground:         #302D28;
-  --card:               #FBF9F6;
-  --card-foreground:    #302D28;
-  --popover:            #FBF9F6;
-  --popover-foreground: #302D28;
-  --primary:            #93613A;
-  --primary-foreground: #FFFCFA;
-  --secondary:          #F5F0E8;
-  --secondary-foreground: #623F27;
-  --muted:              #ECE4DA;
-  --muted-foreground:   #999286;
-  --accent:             #FEF0CF;
-  --accent-foreground:  #845C10;
-  --destructive:        #C0392B;
-  --border:             rgba(170,160,145,0.22);
-  --input:              rgba(170,160,145,0.18);
-  --ring:               #CA9318;
-  --radius:             0.65rem;
+  /* Semantic tokens → shadcn mapping (updated to ME-02) */
+  --background:           var(--ff-surface-1);
+  --foreground:           var(--ff-text-primary);
+  --card:                 var(--ff-surface-2);
+  --card-foreground:      var(--ff-text-primary);
+  --popover:              var(--ff-surface-2);
+  --popover-foreground:   var(--ff-text-primary);
+  --primary:              var(--ff-accent-primary);
+  --primary-foreground:   var(--ff-text-primary);
+  --secondary:            var(--ff-material-cream-200);
+  --secondary-foreground: var(--ff-text-secondary);
+  --muted:                var(--ff-material-cream-300);
+  --muted-foreground:     var(--ff-text-muted);
+  --accent:               var(--ff-material-gold-100);
+  --accent-foreground:    var(--ff-text-secondary);
+  --destructive:          var(--ff-accent-danger);
+  --border:               var(--ff-border-medium);
+  --input:                var(--ff-border-light);
+  --ring:                 var(--ff-accent-primary);
+  --radius:               0.65rem;
 
-  /* Charts */
-  --chart-1: #93613A;
-  --chart-2: #7D9C46;
-  --chart-3: #CA9318;
-  --chart-4: #C99E79;
-  --chart-5: #B7D28E;
+  /* Charts → olive + gold palette */
+  --chart-1: var(--ff-material-wood-400);
+  --chart-2: var(--ff-material-olive-300);
+  --chart-3: var(--ff-material-gold-400);
+  --chart-4: var(--ff-material-copper-200);
+  --chart-5: var(--ff-material-olive-100);
 
   /* Sidebar tokens */
   --sidebar:                    #2A1F14;
