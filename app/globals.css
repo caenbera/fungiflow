@@ -226,6 +226,25 @@
   /* Warm reflection — material warmth (wood/porcelain) */
   --ff-reflection-warm-layer: linear-gradient(135deg, rgba(255,240,210,.06), transparent 42%);
 
+  /* ME-07 · Texture Engine — independent layer, no lighting/shadows/reflections baked in */
+  /* Stack order: Color Base → Texture → Lighting → Reflection → Shadow → Border */
+
+  /* Global texture settings */
+  --ff-texture-opacity: 0.08;        /* 8% — never dominant */
+  --ff-texture-size:    512px;
+  --ff-texture-repeat:  repeat;
+
+  /* Texture assets */
+  --ff-texture-wood: url("/assets/materials/wood/walnut_diffuse.png");
+
+  /* Per-component scale (same value — never differ between components) */
+  --ff-texture-scale-sidebar: 512px;
+  --ff-texture-scale-card:    512px;
+  --ff-texture-scale-premium: 512px;
+
+  /* Components WITH texture: Sidebar, Premium Card, Dark Panels, Footer Sidebar */
+  /* Components WITHOUT texture: Buttons, Inputs, Light Cards, Tables, Modals, Active Item, Avatar */
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
