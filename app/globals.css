@@ -257,6 +257,43 @@
   /* Component elevation tokens (declare on each component) */
   /* Usage: --ff-component-elevation: var(--ff-elevation-3); */
 
+  /* ME-09 · Interaction Engine — uniform interactive states, no material changes at runtime */
+
+  /* Timing */
+  --ff-transition-fast:   120ms;
+  --ff-transition-normal: 180ms;
+  --ff-transition-slow:   260ms;
+  --ff-easing: cubic-bezier(.22, .61, .36, 1);
+
+  /* Base transition — applied to all interactive components */
+  --ff-transition-base:
+    background     var(--ff-transition-normal) var(--ff-easing),
+    box-shadow     var(--ff-transition-normal) var(--ff-easing),
+    transform      var(--ff-transition-fast)   var(--ff-easing),
+    border-color   var(--ff-transition-normal) var(--ff-easing),
+    color          var(--ff-transition-normal) var(--ff-easing);
+
+  /* State: Hover — lift +1px, bump shadow one level up */
+  --ff-hover-transform:    translateY(-1px);
+
+  /* State: Pressed — sink 1px, 80ms only */
+  --ff-pressed-transform:  translateY(1px);
+  --ff-pressed-transition: transform 80ms var(--ff-easing);
+
+  /* State: Focus — accent border, no browser outline */
+  /* Use: outline: none; border-color: var(--ff-accent-primary); */
+
+  /* State: Disabled */
+  --ff-disabled-opacity: .55;
+  /* Use: opacity: var(--ff-disabled-opacity); cursor: not-allowed; pointer-events: none; */
+
+  /* State: Active (selected nav item, tab, etc.) */
+  --ff-active-bg:    var(--ff-material-cream-100);
+  --ff-active-color: var(--ff-text-primary);
+
+  /* Allowed motion: translateY, opacity, box-shadow, background, border-color ONLY */
+  /* Forbidden: scale(), rotate(), bounce, elastic, spring, pulse */
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
