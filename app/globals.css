@@ -4,47 +4,69 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ── FungiFlow Design System — Ceramic & Wood ── */
+/* ── FungiFlow Material Engine v1.0 ── */
+/* ME-01 · Materials — single source of truth for all colors */
 :root {
-  /* Palette */
-  --ceramic-50:  #FFFCFA;
-  --ceramic-100: #FBF8F4;
-  --ceramic-200: #F5F0E8;
-  --ceramic-300: #ECE4DA;
-  --ceramic-400: #DFD3C5;
-  --ceramic-500: #CDBEAE;
-  --ceramic-600: #B49F8B;
-  --ceramic-700: #907966;
-  --ceramic-800: #705C4B;
-  --ceramic-900: #4E4033;
+  /* WOOD — sidebar, dark containers, premium card */
+  --ff-material-wood-900: #2F160A;
+  --ff-material-wood-800: #3B1E0D;
+  --ff-material-wood-700: #472612;
+  --ff-material-wood-600: #563017;
+  --ff-material-wood-500: #6A3C1B;
+  --ff-material-wood-400: #7C4A24;
+  --ff-material-wood-300: #94603A;
 
-  --wood-100: #F2E4D6;
-  --wood-300: #C99E79;
-  --wood-500: #93613A;
-  --wood-700: #623F27;
-  --wood-900: #342117;
+  /* CREAM — active items, cards, inputs, backgrounds */
+  --ff-material-cream-50:  #FFFDF9;
+  --ff-material-cream-100: #FCF7F0;
+  --ff-material-cream-200: #F7F0E4;
+  --ff-material-cream-300: #F2E7D3;
+  --ff-material-cream-400: #E7D6B8;
 
-  --moss-100: #EBF3E0;
-  --moss-300: #B7D28E;
-  --moss-500: #7D9C46;
-  --moss-700: #4E652E;
-  --moss-900: #2A3818;
+  /* GOLD — buttons, premium, icons, badges */
+  --ff-material-gold-100: #FFF2B7;
+  --ff-material-gold-200: #F4D980;
+  --ff-material-gold-300: #E5C15A;
+  --ff-material-gold-400: #D6A73A;
+  --ff-material-gold-500: #B97D17;
 
-  --gold-100: #FEF0CF;
-  --gold-300: #F2C85F;
-  --gold-500: #CA9318;
-  --gold-700: #845C10;
+  /* COPPER — sidebar border, premium contours, separators */
+  --ff-material-copper-100: #E2C09A;
+  --ff-material-copper-200: #C89A68;
+  --ff-material-copper-300: #A56F40;
+  --ff-material-copper-400: #86542B;
+  --ff-material-copper-500: #603719;
 
-  --stone-50:  #FBFAF8;
-  --stone-100: #F3F1EE;
-  --stone-200: #E5E2DD;
-  --stone-300: #D4D0C8;
-  --stone-500: #999286;
-  --stone-700: #605B52;
-  --stone-900: #302D28;
+  /* OLIVE — charts, switch, progress, positive states */
+  --ff-material-olive-100: #C8D3A6;
+  --ff-material-olive-200: #A7B77D;
+  --ff-material-olive-300: #879652;
+  --ff-material-olive-400: #6E7D3D;
+  --ff-material-olive-500: #56642D;
 
-  --danger-500: #C0392B;
-  --danger-100: #FDECEA;
+  /* DANGER — delete button, errors, critical states */
+  --ff-material-danger-100: #FFD9D5;
+  --ff-material-danger-200: #FFAAA0;
+  --ff-material-danger-300: #F46D63;
+  --ff-material-danger-400: #D94841;
+  --ff-material-danger-500: #A52C26;
+
+  /* NEUTRAL — typography, icons, dividers, backgrounds */
+  --ff-material-neutral-100: #FFFFFF;
+  --ff-material-neutral-200: #F6F4F1;
+  --ff-material-neutral-300: #D8D2CB;
+  --ff-material-neutral-400: #9B948D;
+  --ff-material-neutral-500: #5A554F;
+  --ff-material-neutral-600: #2F2B28;
+
+  /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
+  --wood-900: var(--ff-material-wood-900);
+  --wood-700: var(--ff-material-wood-700);
+  --wood-500: var(--ff-material-wood-500);
+  --moss-500: var(--ff-material-olive-300);
+  --moss-700: var(--ff-material-olive-500);
+  --danger-500: var(--ff-material-danger-400);
+  --danger-100: var(--ff-material-danger-100);
 
   /* Semantic tokens → shadcn mapping */
   --background:         #F6F3EE;
