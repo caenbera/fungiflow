@@ -39,21 +39,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="app-shell-3d flex h-screen overflow-hidden">
       <Sidebar />
       <main className="page-surface relative flex-1 overflow-y-auto">
-        {/* Decorative corner illustrations — fixed to viewport edges */}
+        {/* Moss — bottom-left corner of the content area (relative to main) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/musgo-inferior-izquierda.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none fixed bottom-0 left-0 z-0 w-56 select-none opacity-90"
+          className="pointer-events-none absolute bottom-0 left-0 z-0 w-64 select-none opacity-95"
           style={{ filter: 'drop-shadow(0 -8px 24px rgba(0,0,0,0.18))' }}
         />
+        {/* Mushroom — fixed to viewport right edge, above cards */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/hongo-inferior-derecho.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none fixed bottom-0 right-0 z-0 w-64 select-none opacity-90"
+          className="pointer-events-none fixed bottom-0 right-0 z-30 w-72 select-none opacity-95"
           style={{ filter: 'drop-shadow(0 -8px 24px rgba(0,0,0,0.18))' }}
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-7 md:px-8 lg:px-10">
