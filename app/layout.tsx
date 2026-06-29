@@ -19,14 +19,14 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: 'FungiFlow — Gestiona el ritmo de tu cultivo',
+  title: 'FungiFlow - Gestiona el ritmo de tu cultivo',
   description: 'Formulación y análisis financiero de proyectos de cultivo de hongos orellana',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} ${fraunces.variable} bg-background text-foreground min-h-screen antialiased`}>
+      <body className={inter.variable + ' ' + fraunces.variable + ' bg-background text-foreground min-h-screen antialiased'}>
         <AuthProvider>
           {children}
           <Toaster richColors position="top-right" />

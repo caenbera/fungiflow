@@ -65,7 +65,7 @@
   --border:             rgba(170,160,145,0.22);
   --input:              rgba(170,160,145,0.18);
   --ring:               #CA9318;
-  --radius:             0.75rem;
+  --radius:             0.65rem;
 
   /* Charts */
   --chart-1: #93613A;
@@ -89,6 +89,19 @@
   --shadow-card:    0 8px 24px rgba(90,60,35,0.07);
   --shadow-ambient: 0 18px 45px rgba(90,60,35,0.05);
   --shadow-inset:   inset 0 1px 0 rgba(255,255,255,0.72);
+  --shadow-raised:
+    0 1px 0 rgba(255,255,255,0.78) inset,
+    0 -2px 3px rgba(92,62,33,0.10) inset,
+    0 12px 26px rgba(86,55,28,0.12),
+    0 2px 5px rgba(86,55,28,0.10);
+  --shadow-soft-raised:
+    0 1px 0 rgba(255,255,255,0.88) inset,
+    0 -1px 2px rgba(92,62,33,0.08) inset,
+    0 7px 16px rgba(86,55,28,0.10),
+    0 1px 3px rgba(86,55,28,0.08);
+  --shadow-pressed:
+    inset 0 2px 5px rgba(86,55,28,0.16),
+    inset 0 -1px 0 rgba(255,255,255,0.64);
 
   /* Fonts */
   --font-sans:  "Inter", system-ui, -apple-system, sans-serif;
@@ -145,6 +158,10 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "ss01","cv11";
+    background:
+      radial-gradient(circle at top left, rgba(255,255,255,0.75), transparent 28rem),
+      radial-gradient(circle at bottom right, rgba(201,158,121,0.20), transparent 30rem),
+      linear-gradient(135deg, #F7F3ED 0%, #EFE7DC 100%);
   }
 }
 
@@ -677,11 +694,91 @@
 }
 
 @layer utilities {
+
+  .app-shell-3d {
+    background:
+      radial-gradient(circle at 18% 0%, rgba(255,255,255,0.80), transparent 26rem),
+      radial-gradient(circle at 100% 100%, rgba(120,141,66,0.15), transparent 28rem),
+      linear-gradient(135deg, #F7F3ED 0%, #EFE6DA 100%);
+  }
+
+  .page-surface {
+    position: relative;
+  }
+
+  .page-surface::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image:
+      linear-gradient(90deg, rgba(90,62,43,0.06) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(90,62,43,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.75), transparent 70%);
+  }
+
+  .surface-raised {
+    background: linear-gradient(145deg, rgba(255,255,255,0.72), rgba(245,239,230,0.96));
+    border: 1px solid rgba(255,255,255,0.76);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .surface-soft {
+    background: linear-gradient(145deg, rgba(255,255,255,0.58), rgba(245,239,230,0.90));
+    border: 1px solid rgba(255,255,255,0.66);
+    box-shadow: var(--shadow-soft-raised);
+  }
+
+  .surface-inset {
+    background: rgba(236,228,218,0.58);
+    border: 1px solid rgba(128,96,62,0.12);
+    box-shadow: var(--shadow-pressed);
+  }
+
+  .icon-tile-3d {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    color: #6B451D;
+    background: linear-gradient(145deg, #FFF9EF 0%, #E6D8C5 100%);
+    border: 1px solid rgba(255,255,255,0.78);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.78) inset,
+      0 -2px 3px rgba(92,62,33,0.16) inset,
+      0 8px 14px rgba(88,57,31,0.16),
+      0 1px 3px rgba(88,57,31,0.12);
+  }
+
+  .icon-tile-gold {
+    color: #3E260C;
+    background: linear-gradient(145deg, #EAC264 0%, #A97616 100%);
+    border-color: rgba(255,220,110,0.55);
+  }
+
+  .table-row-3d {
+    background: rgba(255,251,247,0.66);
+    border: 1px solid rgba(255,255,255,0.68);
+    box-shadow: var(--shadow-soft-raised);
+  }
+
+  .accent-rule {
+    height: 2px;
+    width: 52px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--gold-500), var(--moss-500));
+    box-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  }
+
   /* Card cerámica: fondo crema + borde inner blanco + sombra cálida */
   .card-ceramic {
-    background: var(--card);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card), var(--shadow-inset);
+    background: linear-gradient(145deg, rgba(255,255,255,0.58), rgba(247,243,237,0.94)), var(--card);
+    border: 1px solid rgba(255,255,255,0.72);
+    box-shadow: var(--shadow-raised);
     border-radius: var(--radius);
   }
 
