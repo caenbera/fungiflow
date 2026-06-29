@@ -440,534 +440,6 @@
   }
 }
 
-/* ════════════════════════════════════════════
-   SIDEBAR — Soft-3D Wood / Neumorfismo Cálido
-   UNA sola superficie. Todo tallado, nada flotante.
-   ════════════════════════════════════════════ */
-
-/* ── SUPERFICIE PRINCIPAL — textura PBR simulada ── */
-.ff-sidebar {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Capa 1: color base madera cálida */
-  background-color: #6A3E1B;
-
-  /* Capa 2: vetas + gradiente vertical + iluminación lateral izquierda */
-  background-image:
-    /* Vetas sutiles horizontales (ruido PBR) */
-    repeating-linear-gradient(
-      91deg,
-      transparent 0px,
-      rgba(0,0,0,0.025) 1px,
-      transparent 2px,
-      transparent 10px
-    ),
-    /* Iluminación lateral izquierda — como luz que golpea la madera */
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.07) 0%,
-      rgba(255,255,255,0.02) 18%,
-      transparent 40%
-    ),
-    /* Gradiente vertical principal */
-    linear-gradient(
-      180deg,
-      #7C4A24 0%,
-      #6A3D1B 40%,
-      #563017 100%
-    );
-
-  /* Sombras multicapa */
-  box-shadow:
-    inset 0 2px 1px rgba(255,255,255,0.18),
-    inset 0 -2px 2px rgba(0,0,0,0.18),
-    8px 0 40px rgba(0,0,0,0.25);
-}
-
-/* ════════ SECCIONES — flujo continuo, sin cards flotantes ════════ */
-
-/* Bloque genérico de sección */
-.ff-section {
-  padding: 14px 16px;
-}
-
-/* Divisor interno — tallado en la madera */
-.ff-divider {
-  height: 1px;
-  margin: 0 16px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0,0,0,0.35) 20%,
-    rgba(0,0,0,0.35) 80%,
-    transparent
-  );
-  /* Highlight superior del divisor = efecto grabado */
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
-}
-
-/* ════════ LOGO ════════ */
-.ff-logo-section {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 16px 16px;
-}
-
-.ff-logo-icon-wrap {
-  flex-shrink: 0;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-
-  /* Cavidad tallada hacia adentro */
-  background: linear-gradient(145deg, #4A2810, #7A4820);
-  border: 1px solid rgba(0,0,0,0.3);
-  box-shadow:
-    inset 0 2px 4px rgba(0,0,0,0.4),
-    inset 0 -1px 2px rgba(255,255,255,0.06),
-    0 1px 0 rgba(255,255,255,0.1);
-}
-
-.ff-logo-img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  border-radius: 6px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
-}
-
-.ff-logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.ff-logo-name {
-  font-size: 17px;
-  font-weight: 800;
-  color: #F5EDD8;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-}
-
-.ff-logo-sub {
-  font-size: 9.5px;
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: #C9A87A;
-  line-height: 1.3;
-}
-
-/* ════════ USUARIO — cavidad tallada ════════ */
-.ff-user-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.18s ease;
-
-  /* Cavidad: más oscuro + borde superior iluminado */
-  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.10));
-  border: 1px solid rgba(0,0,0,0.25);
-  box-shadow:
-    inset 0 2px 4px rgba(0,0,0,0.25),
-    inset 0 -1px 2px rgba(255,255,255,0.05),
-    0 1px 0 rgba(255,255,255,0.08);
-}
-
-.ff-user-section:hover {
-  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));
-}
-
-.ff-user-avatar {
-  flex-shrink: 0;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Marco dorado 3D */
-  background: linear-gradient(145deg, #C8900E, #7A5508);
-  border: 1px solid rgba(255,210,80,0.3);
-  box-shadow:
-    0 3px 10px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,200,60,0.5);
-}
-
-.ff-user-photo {
-  width: 38px;
-  height: 38px;
-  object-fit: cover;
-}
-
-.ff-user-initials {
-  font-size: 14px;
-  font-weight: 700;
-  color: #FEF0CF;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-.ff-user-info { flex: 1; overflow: hidden; }
-
-.ff-user-name {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #F0E6D0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.3;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.ff-user-role {
-  display: block;
-  font-size: 10px;
-  color: #C9A87A;
-  line-height: 1.3;
-}
-
-.ff-user-chevron { color: #C9A87A; flex-shrink: 0; }
-
-/* ════════ NAVEGACIÓN ════════ */
-.ff-nav-section {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 10px 10px;
-}
-
-/* Item base — texto sobre madera */
-.ff-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 10px 13px;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.16s ease;
-  border: 1px solid transparent;
-}
-
-.ff-nav-item:hover:not(.ff-nav-item--active) {
-  background: rgba(0,0,0,0.14);
-  border-color: rgba(0,0,0,0.12);
-}
-
-/* ── ACTIVO — porcelana emergiendo de la madera ── */
-.ff-nav-item--active {
-  background: linear-gradient(180deg, #FBF6EC 0%, #EDE5D2 100%);
-  border: 1px solid rgba(255,255,255,0.82);
-  box-shadow:
-    0 2px 3px rgba(255,255,255,0.18) inset,
-    0 -2px 3px rgba(0,0,0,0.18) inset,
-    0 12px 24px rgba(70,35,10,0.18),
-    0 2px 6px rgba(0,0,0,0.12);
-}
-
-.ff-nav-item--active:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 2px 3px rgba(255,255,255,0.22) inset,
-    0 -2px 3px rgba(0,0,0,0.15) inset,
-    0 16px 28px rgba(70,35,10,0.2),
-    0 4px 8px rgba(0,0,0,0.14);
-}
-
-/* Ícono contenedor 3D */
-.ff-nav-icon {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.16s ease;
-
-  /* Estado inactivo: cavidad oscura */
-  background: linear-gradient(145deg, #3E2210, #5A3018);
-  border: 1px solid rgba(0,0,0,0.3);
-  box-shadow:
-    inset 0 2px 4px rgba(0,0,0,0.35),
-    inset 0 -1px 1px rgba(255,255,255,0.04),
-    0 1px 0 rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.4);
-}
-
-/* Ícono activo: relieve dorado */
-.ff-nav-icon--active {
-  background: linear-gradient(145deg, #C8900E, #7A5508);
-  border: 1px solid rgba(255,200,60,0.35);
-  box-shadow:
-    0 3px 10px rgba(0,0,0,0.35),
-    0 1px 3px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,215,70,0.55);
-  color: #FEF0CF;
-}
-
-.ff-nav-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.48);
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color 0.16s;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-.ff-nav-item--active .ff-nav-label {
-  color: #3D2008;
-  font-weight: 700;
-  text-shadow: none;
-}
-
-.ff-nav-item:hover:not(.ff-nav-item--active) .ff-nav-label {
-  color: rgba(255,255,255,0.72);
-}
-
-/* ════════ PLAN PREMIUM ════════ */
-.ff-premium-section {
-  margin: 0 10px;
-  padding: 13px 14px;
-  border-radius: 14px;
-  position: relative;
-  overflow: hidden;
-
-  /* Cavidad profunda con reflejo en borde superior */
-  background: linear-gradient(160deg, #3A2010 0%, #2A1608 100%);
-  border: 1px solid rgba(0,0,0,0.35);
-  box-shadow:
-    inset 0 2px 6px rgba(0,0,0,0.4),
-    inset 0 -1px 3px rgba(255,255,255,0.05),
-    0 1px 0 rgba(255,255,255,0.08),
-    0 6px 20px rgba(0,0,0,0.2);
-}
-
-/* Reflejo dorado diagonal */
-.ff-premium-section::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 40%;
-  pointer-events: none;
-  border-radius: 14px 14px 0 0;
-  background: linear-gradient(
-    135deg,
-    rgba(202,147,24,0.10) 0%,
-    transparent 60%
-  );
-}
-
-.ff-premium-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 5px;
-  position: relative;
-}
-
-.ff-premium-star { color: #D4A020; flex-shrink: 0; }
-
-.ff-premium-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: #F5C842;
-  letter-spacing: 0.03em;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-}
-
-.ff-premium-desc {
-  font-size: 10px;
-  line-height: 1.5;
-  color: #B8905A;
-  margin: 0 0 11px;
-  position: relative;
-}
-
-.ff-premium-btn {
-  width: 100%;
-  padding: 9px 0;
-  border-radius: 9px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  letter-spacing: 0.03em;
-  transition: all 0.15s ease;
-  position: relative;
-
-  /* Botón dorado 3D */
-  background: linear-gradient(180deg, #D9A320 0%, #9A7010 100%);
-  color: #2A1206;
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.4),
-    0 1px 3px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,225,80,0.55),
-    inset 0 -1px 0 rgba(0,0,0,0.25);
-}
-
-.ff-premium-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 7px 18px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,225,80,0.65);
-}
-
-.ff-premium-btn:active {
-  transform: translateY(1px);
-  box-shadow:
-    0 1px 4px rgba(0,0,0,0.4),
-    inset 0 2px 5px rgba(0,0,0,0.25);
-}
-
-/* ════════ HONGOS — zona integrada en la superficie ════════ */
-.ff-fungi-zone {
-  position: relative;
-  width: 100%;
-  height: 136px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-/* Fade superior: la imagen se funde con la madera */
-.ff-fungi-fade {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 48px;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    #563017 0%,      /* color exacto del sidebar en esa zona */
-    transparent 100%
-  );
-  z-index: 2;
-}
-
-.ff-fungi-moss {
-  position: absolute;
-  bottom: 0; left: -6px;
-  height: 88px;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-}
-
-.ff-fungi-center {
-  position: absolute;
-  bottom: -4px;
-  left: 50%; transform: translateX(-50%);
-  height: 132px;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-  filter: drop-shadow(0 -4px 16px rgba(180,120,30,0.25));
-}
-
-.ff-fungi-right {
-  position: absolute;
-  bottom: 0; right: -4px;
-  height: 76px;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-  opacity: 0.8;
-}
-
-/* ════════ FOOTER ════════ */
-.ff-footer-section {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  flex-shrink: 0;
-
-  /* Línea superior tallada */
-  border-top: 1px solid rgba(0,0,0,0.35);
-  box-shadow: 0 -1px 0 rgba(255,255,255,0.06);
-}
-
-.ff-logout-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.25);
-  background: linear-gradient(145deg, #3E2210, #5A3018);
-  box-shadow: inset 0 2px 3px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.06);
-  cursor: pointer;
-  color: rgba(255,255,255,0.35);
-  transition: all 0.15s ease;
-  flex-shrink: 0;
-}
-
-.ff-logout-btn:hover {
-  color: #E57373;
-  border-color: rgba(192,57,43,0.3);
-}
-
-.ff-collapse-label {
-  flex: 1;
-  font-size: 11px;
-  color: rgba(255,255,255,0.3);
-  white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.ff-collapse-btn {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: rgba(255,255,255,0.45);
-  transition: all 0.15s ease;
-
-  background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(0,0,0,0.1));
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-.ff-collapse-btn:hover {
-  color: #F5C842;
-  border-color: rgba(202,147,24,0.35);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,200,60,0.2);
-}
-
-.ff-collapse-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-}
-
 @layer utilities {
 
   .app-shell-3d {
@@ -1106,97 +578,110 @@
 }
 
 
-/* Luxury Organic 3D floating sidebar */
+/* =====================================
+   SIDEBAR 3.0
+   ===================================== */
+
+/* ── 1. SIDEBAR SHELL ── */
 .ff-sidebar {
   position: relative;
   isolation: isolate;
   height: calc(100vh - 32px);
   min-height: 680px;
   margin: 16px 0 16px 16px;
-  padding: 10px 10px 12px;
-  border-radius: 34px;
-  overflow: visible;
+  padding: 0;
+  border-radius: var(--ff-border-radius-xl);
+  overflow: hidden;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.28s ease;
-  background-color: #5c3319;
-  /* Top is darker — light comes from top-right not top-center */
+  transition:
+    width var(--ff-transition-slow) var(--ff-easing),
+    border-radius var(--ff-transition-slow) var(--ff-easing);
+
+  /* Layer 1: Material Base */
+  background-color: var(--ff-surface-3);
+
+  /* Layer 2: Wood Texture (simulated grain + vertical depth) */
   background-image:
-    radial-gradient(70% 38% at 88% 4%, rgba(230, 178, 105, 0.18), transparent 55%),
-    radial-gradient(80% 60% at 92% 18%, rgba(28, 10, 3, 0.28), transparent 62%),
-    repeating-linear-gradient(112deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 10px),
-    repeating-linear-gradient(24deg, rgba(0,0,0,0.035) 0 1px, transparent 1px 14px),
-    linear-gradient(180deg, #3d1f0e 0%, #5b3218 36%, #4a2914 68%, #3a1c0c 100%);
-  border: none;
+    repeating-linear-gradient(112deg, rgba(255,255,255,.028) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient( 24deg, rgba(  0,  0,  0,.035) 0 1px, transparent 1px 14px),
+    linear-gradient(180deg,
+      var(--ff-material-wood-800)  0%,
+      var(--ff-material-wood-600) 36%,
+      var(--ff-material-wood-700) 68%,
+      var(--ff-material-wood-900) 100%
+    );
+
+  /* Layer 5: Shadow — elevation-3 */
   box-shadow:
-    14px 18px 38px rgba(20, 8, 2, 0.42),
-    4px 7px 12px rgba(28, 14, 6, 0.22),
-    /* interior: top darker, bottom shadow */
-    inset 0 22px 38px rgba(12, 4, 1, 0.36),
-    inset 0 -6px 12px rgba(18, 6, 1, 0.30);
+    var(--ff-shadow-3),
+    var(--ff-shadow-inner);
 }
 
-/* Gradient border — light from top-right, dark at bottom */
+/* Layer 6: Premium Border — conic-gradient following 325° key light */
 .ff-sidebar::before {
   content: "";
   position: absolute;
   inset: -1.5px;
-  border-radius: 35.5px;
+  border-radius: calc(var(--ff-border-radius-xl) + 1.5px);
   pointer-events: none;
   z-index: -2;
   background: conic-gradient(
     from -38deg at 97% 2%,
-    rgba(255, 242, 182, 0.92) 0deg 18deg,    /* top-right corner: brightest */
-    rgba(235, 188, 118, 0.70) 18deg 75deg,   /* right edge upper: warm gold */
-    rgba(175, 115, 52, 0.52) 75deg 118deg,   /* right edge lower: medium */
-    rgba(30, 10, 3, 0.80) 118deg 148deg,     /* bottom-right: dark shadow corner */
-    rgba(18, 6, 1, 0.85) 148deg 212deg,      /* bottom edge: very dark, shadow below */
-    rgba(28, 10, 3, 0.68) 212deg 262deg,     /* left edge: dark */
-    rgba(110, 68, 24, 0.48) 262deg 318deg,   /* top-left: medium-dark */
-    rgba(255, 242, 182, 0.92) 318deg 360deg  /* back to top-right */
+    var(--ff-border-highlight)       0deg  18deg,
+    var(--ff-border-light)          18deg  75deg,
+    var(--ff-border-base)           75deg 148deg,
+    var(--ff-border-shadow)        148deg 262deg,
+    rgba(110, 68, 24, .48)         262deg 318deg,
+    var(--ff-border-highlight)     318deg 360deg
   );
 }
 
-/* Interior surface overlay: adds 3D depth inside */
+/* Layer 3: Lighting + Layer 4: Reflection */
 .ff-sidebar::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 34px;
+  border-radius: inherit;
   pointer-events: none;
   z-index: 0;
   background:
-    /* Top-right inner highlight — where light enters */
-    radial-gradient(55% 30% at 88% 0%, rgba(255, 220, 155, 0.14), transparent 60%),
-    /* Bottom inner shadow — adds depth */
-    radial-gradient(100% 52% at 50% 108%, rgba(10, 3, 1, 0.28), transparent 55%),
-    /* Diagonal soft-light pass */
-    linear-gradient(130deg, rgba(255,255,255,0.10), transparent 22%, transparent 76%, rgba(0,0,0,0.18));
+    var(--ff-specular-highlight),
+    var(--ff-reflection-warm-layer),
+    var(--ff-lighting-key),
+    var(--ff-lighting-fill),
+    var(--ff-lighting-rim),
+    var(--ff-lighting-bounce),
+    var(--ff-lighting-ao);
   mix-blend-mode: soft-light;
 }
 
+/* Content always above material layers */
 .ff-sidebar > * {
   position: relative;
   z-index: 1;
 }
 
-/* Thin inner rim — brightens just inside the border edge at top-right */
+/* Inner rim — brightens just inside the border edge at top-right */
 .ff-sidebar-glow {
   position: absolute;
   inset: 1px;
-  border-radius: 33px;
+  border-radius: calc(var(--ff-border-radius-xl) - 1px);
   pointer-events: none;
   z-index: 0;
   box-shadow:
-    inset -1px 1px 0 rgba(255, 228, 158, 0.28),   /* top-right inner rim */
-    inset 1px -1px 0 rgba(10, 3, 1, 0.22);          /* bottom-left inner shadow */
+    inset -1px  1px 0 rgba(255, 228, 158, .28),
+    inset  1px -1px 0 rgba( 10,   3,   1, .22);
 }
 
 .ff-sidebar--collapsed {
   border-radius: 25px;
-  min-height: calc(100vh - 32px);
-  padding-inline: 8px;
+}
+
+/* ── 3. HEADER ── */
+.ff-sidebar-header {
+  flex-shrink: 0;
 }
 
 .ff-section {
@@ -1213,16 +698,17 @@
 .ff-logo-icon-wrap {
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
   border-radius: 16px;
   padding: 5px;
   background:
-    linear-gradient(145deg, #2a1308, #875024),
-    radial-gradient(circle at 35% 25%, rgba(255, 210, 120, 0.28), transparent 42%);
-  border: 1px solid rgba(232, 175, 94, 0.42);
+    linear-gradient(145deg, var(--ff-material-wood-900), var(--ff-material-wood-400)),
+    radial-gradient(circle at 35% 25%, rgba(255,210,120,.28), transparent 42%);
+  border: 1px solid rgba(232, 175, 94, .42);
   box-shadow:
-    0 7px 16px rgba(21, 8, 2, 0.38),
-    inset 0 2px 3px rgba(255, 208, 132, 0.18),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.38);
+    0 7px 16px rgba(21, 8, 2, .38),
+    var(--ff-border-inner-highlight),
+    inset 0 -3px 6px rgba(0, 0, 0, .38);
 }
 
 .ff-logo-img {
@@ -1230,15 +716,20 @@
   height: 38px;
   object-fit: contain;
   border-radius: 12px;
-  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.42));
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.42));
+}
+
+.ff-logo-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .ff-logo-name {
   font-size: 19px;
   line-height: 1.05;
   font-weight: 800;
-  color: #fff9ee;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.52);
+  color: var(--ff-text-light);
+  text-shadow: 0 2px 4px rgba(0,0,0,.52);
 }
 
 .ff-logo-sub {
@@ -1247,44 +738,93 @@
   line-height: 1.2;
   font-family: var(--font-serif);
   font-style: italic;
-  color: #ead0a4;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+  color: var(--ff-material-copper-100);
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
 }
 
 .ff-divider {
   height: 1px;
   margin: 0 16px 10px;
-  background: linear-gradient(90deg, transparent, rgba(27, 11, 4, 0.58), rgba(246, 196, 123, 0.18), transparent);
-  box-shadow: 0 1px 0 rgba(255, 223, 171, 0.10);
+  background: linear-gradient(90deg,
+    transparent,
+    var(--ff-divider-dark)  20%,
+    var(--ff-divider-light) 50%,
+    var(--ff-divider-dark)  80%,
+    transparent
+  );
+  box-shadow: 0 1px 0 rgba(255, 223, 171, .10);
 }
 
+/* ── 8. SCROLL SYSTEM ── */
+.ff-sidebar-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  mask-image: linear-gradient(to bottom,
+    transparent 0px,
+    black 14px,
+    black calc(100% - 12px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 0px,
+    black 14px,
+    black calc(100% - 12px),
+    transparent 100%
+  );
+}
+
+.ff-sidebar-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── 4. AVATAR ── */
 .ff-user-section {
-  margin: 0 6px 12px;
-  padding: 10px 10px;
+  margin: 4px 0 12px;
+  padding: 10px;
   min-height: 66px;
   display: flex;
   align-items: center;
   gap: 10px;
-  border-radius: 16px;
-  background:
-    linear-gradient(145deg, rgba(132, 75, 35, 0.88), rgba(77, 38, 16, 0.92));
-  border: 1px solid rgba(30, 12, 4, 0.62);
+  border-radius: var(--ff-border-radius-md);
+  background: linear-gradient(145deg,
+    rgba(132, 75, 35, .88),
+    rgba( 77, 38, 16, .92)
+  );
+  border: 1px solid rgba(30, 12, 4, .62);
   box-shadow:
-    0 10px 18px rgba(29, 12, 4, 0.25),
-    inset 0 1px 0 rgba(255, 210, 145, 0.22),
-    inset 0 -2px 5px rgba(14, 5, 1, 0.30);
+    var(--ff-shadow-2),
+    var(--ff-border-inner-highlight),
+    inset 0 -2px 5px rgba(14, 5, 1, .30);
+  cursor: pointer;
+  transition: var(--ff-transition-base);
+}
+
+.ff-user-section:hover {
+  transform: var(--ff-hover-transform);
 }
 
 .ff-user-avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  flex-shrink: 0;
   padding: 3px;
-  background: linear-gradient(145deg, #e2ac4e, #8a5b12 68%, #44270a);
-  border: 1px solid rgba(255, 222, 122, 0.42);
+  background: linear-gradient(145deg,
+    var(--ff-material-gold-300),
+    var(--ff-material-gold-500) 68%,
+    var(--ff-material-copper-500)
+  );
+  border: 1px solid rgba(255, 222, 122, .42);
   box-shadow:
-    0 7px 14px rgba(18, 7, 2, 0.42),
-    inset 0 1px 0 rgba(255, 229, 146, 0.62);
+    var(--ff-shadow-2),
+    inset 0 1px 0 rgba(255, 229, 146, .62);
 }
 
 .ff-user-photo,
@@ -1302,55 +842,55 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #3c1e0e;
-  color: #ffe6b4;
+  background: var(--ff-material-wood-800);
+  color: var(--ff-material-gold-100);
   font-size: 15px;
   font-weight: 800;
 }
 
+.ff-user-info {
+  flex: 1;
+  overflow: hidden;
+}
+
 .ff-user-name {
+  display: block;
   font-size: 13px;
   font-weight: 800;
-  color: #fff6e6;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+  color: var(--ff-text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
 }
 
 .ff-user-role {
+  display: block;
   margin-top: 2px;
   font-size: 10px;
-  color: #e2bb78;
+  color: var(--ff-material-gold-200);
+  line-height: 1.3;
 }
 
 .ff-user-chevron {
-  color: #cfa66e;
+  color: var(--ff-material-copper-100);
+  flex-shrink: 0;
 }
 
+/* ── 5. NAVIGATION ── */
 .ff-nav-section {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 0 8px 10px;
-  /* Scrollable — items slide under the logo divider, no visible scrollbar */
-  flex: 1 1 0;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  /* Fade-out at top so items melt into the divider line */
-  mask-image: linear-gradient(to bottom, transparent 0px, black 14px, black 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 14px, black 100%);
-}
-
-.ff-nav-section::-webkit-scrollbar {
-  display: none;
+  padding-bottom: 10px;
 }
 
 .ff-nav-item {
   width: 100%;
   min-height: 42px;
   border: 1px solid transparent;
-  border-radius: 14px;
+  border-radius: var(--ff-border-radius-sm);
   padding: 6px 11px;
   display: flex;
   align-items: center;
@@ -1360,29 +900,41 @@
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+  transition: var(--ff-transition-base);
 }
 
 .ff-nav-item:hover:not(.ff-nav-item--active) {
-  transform: translateY(-1px);
-  background: rgba(23, 8, 2, 0.18);
-  border-color: rgba(255, 208, 139, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: var(--ff-hover-transform);
+  background: rgba(23, 8, 2, .18);
+  border-color: rgba(255, 208, 139, .08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
 }
 
+/* ── 6. ACTIVE ITEM — Premium Porcelain ── */
 .ff-nav-item--active {
   min-height: 52px;
   padding: 8px 12px;
-  border-radius: 13px;
+  border-radius: var(--ff-border-radius-sm);
   background:
-    radial-gradient(circle at 18% 10%, rgba(255,255,255,0.82), transparent 34%),
-    linear-gradient(145deg, #fff8e8 0%, #e8d8bd 58%, #c7904a 100%);
-  border: 1px solid rgba(255, 244, 220, 0.88);
+    radial-gradient(circle at 18% 10%, rgba(255,255,255,.82), transparent 34%),
+    linear-gradient(145deg,
+      var(--ff-material-cream-50)   0%,
+      var(--ff-material-cream-200) 58%,
+      var(--ff-material-copper-100) 100%
+    );
+  border: 1px solid rgba(255, 244, 220, .88);
   box-shadow:
-    0 13px 22px rgba(32, 13, 4, 0.30),
-    0 3px 6px rgba(33, 13, 4, 0.18),
-    inset 0 2px 1px rgba(255,255,255,0.82),
-    inset 0 -3px 6px rgba(122, 74, 25, 0.24);
+    var(--ff-shadow-2),
+    var(--ff-border-inner-highlight),
+    inset 0 -3px 6px rgba(122, 74, 25, .24);
+}
+
+.ff-nav-item--active:hover {
+  transform: var(--ff-hover-transform);
+  box-shadow:
+    var(--ff-shadow-3),
+    var(--ff-border-inner-highlight),
+    inset 0 -3px 6px rgba(122, 74, 25, .24);
 }
 
 .ff-nav-icon {
@@ -1393,55 +945,67 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  color: #f0d29e;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35));
-  background: transparent;
-  border: 0;
-  box-shadow: none;
+  color: var(--ff-material-gold-200);
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.35));
+  transition: var(--ff-transition-base);
 }
 
 .ff-nav-icon--active {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  color: #fff3cc;
-  background: linear-gradient(145deg, #d59a18 0%, #8f5b09 100%);
-  border: 1px solid rgba(255, 219, 91, 0.45);
+  color: var(--ff-material-gold-100);
+  filter: none;
+  background: linear-gradient(145deg,
+    var(--ff-material-gold-300),
+    var(--ff-material-gold-500)
+  );
+  border: 1px solid rgba(255, 219, 91, .45);
   box-shadow:
-    0 7px 13px rgba(89, 47, 5, 0.32),
-    inset 0 1px 0 rgba(255, 230, 120, 0.62),
-    inset 0 -2px 4px rgba(59, 29, 0, 0.26);
+    var(--ff-shadow-2),
+    var(--ff-border-inner-highlight),
+    inset 0 -2px 4px rgba(59, 29, 0, .26);
 }
 
 .ff-nav-label {
   flex: 1;
   min-width: 0;
-  color: rgba(255, 246, 228, 0.88);
+  color: rgba(255, 246, 228, .88);
   font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.46);
+  text-shadow: 0 1px 3px rgba(0,0,0,.46);
+  transition: color var(--ff-transition-normal) var(--ff-easing);
 }
 
 .ff-nav-item--active .ff-nav-label {
-  color: #4a250b;
+  color: var(--ff-text-primary);
   font-weight: 800;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.42);
+  text-shadow: 0 1px 0 rgba(255,255,255,.42);
+}
+
+.ff-nav-item:hover:not(.ff-nav-item--active) .ff-nav-label {
+  color: var(--ff-text-light);
 }
 
 .ff-nav-item--disabled {
-  opacity: 0.92;
+  opacity: var(--ff-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
+/* Currency panel */
 .ff-currency-panel {
-  margin: 0 8px 12px;
+  margin: 0 0 12px;
   padding: 10px;
   border-radius: 15px;
-  background: rgba(120, 67, 31, 0.52);
-  border: 1px solid rgba(255, 203, 129, 0.10);
-  box-shadow: inset 0 2px 6px rgba(31, 11, 3, 0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+  background: rgba(120, 67, 31, .52);
+  border: 1px solid rgba(255, 203, 129, .10);
+  box-shadow:
+    inset 0 2px 6px rgba(31, 11, 3, .25),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 .ff-currency-panel > div {
@@ -1449,20 +1013,24 @@
   padding: 0 !important;
 }
 
+/* ── 7. PREMIUM CARD ── */
 .ff-premium-section {
   position: relative;
-  margin: 0 8px 12px;
+  margin: 0 0 12px;
   padding: 15px 14px 13px;
   border-radius: 19px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 16% 28%, rgba(218, 151, 43, 0.20), transparent 34%),
-    linear-gradient(145deg, #4a200c 0%, #2a1006 100%);
-  border: 1px solid rgba(224, 171, 82, 0.45);
+    radial-gradient(circle at 16% 28%, rgba(218, 151, 43, .20), transparent 34%),
+    linear-gradient(145deg,
+      var(--ff-material-wood-700) 0%,
+      var(--ff-material-wood-900) 100%
+    );
+  border: 1px solid rgba(224, 171, 82, .45);
   box-shadow:
-    0 13px 22px rgba(20, 7, 2, 0.34),
-    inset 0 1px 0 rgba(255, 206, 111, 0.22),
-    inset 0 -4px 9px rgba(0,0,0,0.36);
+    var(--ff-shadow-2),
+    var(--ff-border-inner-highlight),
+    inset 0 -4px 9px rgba(0,0,0,.36);
 }
 
 .ff-premium-section::before {
@@ -1470,7 +1038,7 @@
   position: absolute;
   inset: 1px;
   border-radius: 18px;
-  border: 1px solid rgba(255, 216, 136, 0.18);
+  border: 1px solid rgba(255, 216, 136, .18);
   pointer-events: none;
 }
 
@@ -1482,36 +1050,19 @@
 }
 
 .ff-premium-star {
-  color: #e6ad28;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45));
+  color: var(--ff-material-gold-400);
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.45));
 }
 
 .ff-premium-title {
   font-size: 14px;
   font-weight: 800;
-  color: #ffd35e;
-}
-
-.ff-premium-art {
-  position: absolute;
-  left: 13px;
-  bottom: 46px;
-  width: 56px;
-  height: 56px;
-  pointer-events: none;
-}
-
-.ff-premium-art img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 8px 8px rgba(0,0,0,0.42));
+  color: var(--ff-material-gold-200);
 }
 
 .ff-premium-desc {
-  margin: 0 0 14px 66px;
-  min-height: 38px;
-  color: #e8c58b;
+  margin: 0 0 14px;
+  color: var(--ff-material-copper-100);
   font-size: 11px;
   line-height: 1.42;
 }
@@ -1520,83 +1071,43 @@
   width: 100%;
   height: 40px;
   border-radius: 13px;
-  border: 1px solid rgba(255, 222, 120, 0.52);
+  border: 1px solid rgba(255, 222, 120, .52);
   background:
-    radial-gradient(circle at 30% 0%, rgba(255,255,255,0.28), transparent 36%),
-    linear-gradient(180deg, #e0ae2f 0%, #a96d10 100%);
-  color: #271100;
+    radial-gradient(circle at 30% 0%, rgba(255,255,255,.28), transparent 36%),
+    linear-gradient(180deg,
+      var(--ff-material-gold-300) 0%,
+      var(--ff-material-gold-500) 100%
+    );
+  color: var(--ff-text-primary);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
+  transition: var(--ff-transition-base);
   box-shadow:
-    0 9px 14px rgba(12, 4, 1, 0.42),
-    inset 0 1px 0 rgba(255, 236, 143, 0.66),
-    inset 0 -2px 5px rgba(72, 36, 0, 0.28);
+    var(--ff-shadow-2),
+    var(--ff-border-inner-highlight),
+    inset 0 -2px 5px rgba(72, 36, 0, .28);
 }
 
-.ff-sidebar-spacer {
-  flex: 1 1 auto;
-  min-height: 6px;
+.ff-premium-btn:hover {
+  transform: var(--ff-hover-transform);
+  box-shadow: var(--ff-shadow-3), var(--ff-border-inner-highlight);
 }
 
-.ff-fungi-zone {
-  position: relative;
-  height: 102px;
-  flex: 0 0 auto;
-  margin: 0 -18px -3px -20px;
-  overflow: visible;
-  pointer-events: none;
+.ff-premium-btn:active {
+  transform: var(--ff-pressed-transform);
 }
 
-.ff-fungi-fade {
-  position: absolute;
-  inset: 0 15px auto 20px;
-  height: 42px;
-  background: linear-gradient(180deg, #3d1d0d 0%, rgba(61,29,13,0) 100%);
-  opacity: 0.75;
-  z-index: 1;
-}
-
-.ff-fungi-moss {
-  position: absolute;
-  left: -20px;
-  bottom: -13px;
-  width: 112px;
-  height: auto;
-  z-index: 4;
-  filter: drop-shadow(0 -5px 12px rgba(0,0,0,0.24));
-}
-
-.ff-fungi-center {
-  position: absolute;
-  left: 82px;
-  bottom: -10px;
-  width: 92px;
-  height: auto;
-  z-index: 3;
-  filter: drop-shadow(0 -7px 14px rgba(224, 168, 81, 0.18)) drop-shadow(0 8px 8px rgba(0,0,0,0.28));
-}
-
-.ff-fungi-right {
-  position: absolute;
-  right: -5px;
-  bottom: -12px;
-  width: 116px;
-  height: auto;
-  z-index: 3;
-  filter: drop-shadow(0 7px 8px rgba(0,0,0,0.30));
+/* ── 9. FOOTER ── */
+.ff-sidebar-footer {
+  flex-shrink: 0;
+  padding: 0 8px 12px;
 }
 
 .ff-footer-section {
-  margin: 0 -10px -12px;
-  padding: 8px 12px 12px;
-  border-radius: 0 0 32px 32px;
-  border-top: 1px solid rgba(24, 8, 2, 0.42);
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: rgba(45, 18, 7, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 .ff-logout-btn,
@@ -1609,26 +1120,52 @@
   justify-content: center;
   gap: 8px;
   border-radius: 11px;
-  color: rgba(255, 229, 190, 0.64);
-  border: 1px solid rgba(255,255,255,0.08);
-  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,0,0,0.18));
+  color: rgba(255, 229, 190, .64);
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(0,0,0,.18));
   box-shadow:
-    0 4px 8px rgba(0,0,0,0.20),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+    var(--ff-shadow-1),
+    inset 0 1px 0 rgba(255,255,255,.08);
   cursor: pointer;
   font-size: 12px;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
+  transition: var(--ff-transition-base);
 }
 
 .ff-logout-btn:hover {
-  color: #ff9a8c;
-  border-color: rgba(255, 154, 140, 0.20);
+  color: var(--ff-material-danger-300);
+  border-color: rgba(255, 154, 140, .20);
+  transform: var(--ff-hover-transform);
 }
 
 .ff-collapse-btn:hover {
-  color: #ffd35e;
-  border-color: rgba(255, 211, 94, 0.22);
+  color: var(--ff-material-gold-200);
+  border-color: rgba(255, 211, 94, .22);
+  transform: var(--ff-hover-transform);
+}
+
+.ff-logout-btn:active,
+.ff-collapse-btn:active {
+  transform: var(--ff-pressed-transform);
+}
+
+/* ── 10. RESPONSIVE ── */
+@media (max-width: 767px) {
+  .ff-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0 var(--ff-border-radius-xl) var(--ff-border-radius-xl) 0;
+    z-index: var(--ff-z-overlay);
+  }
+}
+
+/* ── UTILITIES ── */
+.ff-sidebar-spacer {
+  display: none;
 }
 
 /* When sidebar is collapsed: icon-only, circular */

@@ -62,97 +62,105 @@ export function Sidebar() {
 
   return (
     <aside className={collapsed ? 'ff-sidebar ff-sidebar--collapsed' : 'ff-sidebar'} style={{ width: collapsed ? 78 : 252 }}>
-      <div className="ff-sidebar-glow" />
+      {/* Decoration layer — visual only, no content */}
+      <div className="ff-sidebar-glow" aria-hidden="true" />
 
-      <div className="ff-section ff-logo-section">
-        <div className="ff-logo-icon-wrap">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="FungiFlow" width={42} height={42} className="ff-logo-img" />
-        </div>
-        {!collapsed && (
-          <div className="ff-logo-text">
-            <span className="ff-logo-name">FungiFlow</span>
-            <span className="ff-logo-sub">Plataforma Integral</span>
+      {/* Header — fixed */}
+      <div className="ff-sidebar-header">
+        <div className="ff-logo-section">
+          <div className="ff-logo-icon-wrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="FungiFlow" width={42} height={42} className="ff-logo-img" />
           </div>
-        )}
+          {!collapsed && (
+            <div className="ff-logo-text">
+              <span className="ff-logo-name">FungiFlow</span>
+              <span className="ff-logo-sub">Plataforma Integral</span>
+            </div>
+          )}
+        </div>
+        <div className="ff-divider" />
       </div>
 
-      <div className="ff-divider" />
+      {/* Scroll Area — only this region scrolls */}
+      <div className="ff-sidebar-scroll">
+        {!collapsed && (
+          <div className="ff-user-section">
+            <div className="ff-user-avatar">
+              {user?.photoURL ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={user.photoURL} alt="" className="ff-user-photo" />
+              ) : (
+                <span className="ff-user-initials">{getInitials(user?.displayName, user?.email)}</span>
+              )}
+            </div>
+            <div className="ff-user-info">
+              <span className="ff-user-name">{user?.displayName?.split(' ').slice(0, 2).join(' ') || 'Carlos Mendoza'}</span>
+              <span className="ff-user-role">Administrador</span>
+            </div>
+            <ChevronDown size={14} className="ff-user-chevron" />
+          </div>
+        )}
 
-      {!collapsed && (
-        <div className="ff-section ff-user-section">
-          <div className="ff-user-avatar">
-            {user?.photoURL ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={user.photoURL} alt="" className="ff-user-photo" />
+        <nav className="ff-nav-section">
+          {visibleItems.map(({ href, label, icon: Icon }) => {
+            const isRealRoute = href.startsWith('/');
+            const active = isRealRoute && pathname.startsWith(href);
+            const itemClass = 'ff-nav-item ' + (active ? 'ff-nav-item--active ' : '') + (!isRealRoute ? 'ff-nav-item--disabled' : '');
+            const content = (
+              <>
+                <span className={'ff-nav-icon ' + (active ? 'ff-nav-icon--active' : '')}>
+                  <Icon size={18} strokeWidth={active ? 2.5 : 2} />
+                </span>
+                {!collapsed && <span className="ff-nav-label">{label}</span>}
+              </>
+            );
+
+            return isRealRoute ? (
+              <Link key={href} href={href} title={collapsed ? label : undefined} className={itemClass}>
+                {content}
+              </Link>
             ) : (
-              <span className="ff-user-initials">{getInitials(user?.displayName, user?.email)}</span>
-            )}
-          </div>
-          <div className="ff-user-info">
-            <span className="ff-user-name">{user?.displayName?.split(' ').slice(0, 2).join(' ') || 'Carlos Mendoza'}</span>
-            <span className="ff-user-role">Administrador</span>
-          </div>
-          <ChevronDown size={14} className="ff-user-chevron" />
-        </div>
-      )}
+              <button key={href} type="button" title={collapsed ? label : undefined} className={itemClass}>
+                {content}
+              </button>
+            );
+          })}
+        </nav>
 
-      <nav className="ff-nav-section">
-        {visibleItems.map(({ href, label, icon: Icon }) => {
-          const isRealRoute = href.startsWith('/');
-          const active = isRealRoute && pathname.startsWith(href);
-          const itemClass = 'ff-nav-item ' + (active ? 'ff-nav-item--active ' : '') + (!isRealRoute ? 'ff-nav-item--disabled' : '');
-          const content = (
-            <>
-              <span className={'ff-nav-icon ' + (active ? 'ff-nav-icon--active' : '')}>
-                <Icon size={18} strokeWidth={active ? 2.5 : 2} />
-              </span>
-              {!collapsed && <span className="ff-nav-label">{label}</span>}
-            </>
-          );
-
-          return isRealRoute ? (
-            <Link key={href} href={href} title={collapsed ? label : undefined} className={itemClass}>
-              {content}
-            </Link>
-          ) : (
-            <button key={href} type="button" title={collapsed ? label : undefined} className={itemClass}>
-              {content}
-            </button>
-          );
-        })}
-      </nav>
-
-      {!collapsed && (
-        <div className="ff-section ff-currency-panel">
-          <CurrencyToggle dark />
-        </div>
-      )}
-
-      <div className="ff-premium-section">
-        <div className="ff-premium-header">
-          <span className="ff-premium-star"><Crown size={17} /></span>
-          {!collapsed && <span className="ff-premium-title">Plan Premium</span>}
-        </div>
         {!collapsed && (
-          <>
-            <p className="ff-premium-desc">Funciones avanzadas y almacenamiento ilimitado.</p>
-            <button className="ff-premium-btn">Ver planes</button>
-          </>
+          <div className="ff-currency-panel">
+            <CurrencyToggle dark />
+          </div>
         )}
+
+        <div className="ff-premium-section">
+          <div className="ff-premium-header">
+            <span className="ff-premium-star"><Crown size={17} /></span>
+            {!collapsed && <span className="ff-premium-title">Plan Premium</span>}
+          </div>
+          {!collapsed && (
+            <>
+              <p className="ff-premium-desc">Funciones avanzadas y almacenamiento ilimitado.</p>
+              <button className="ff-premium-btn">Ver planes</button>
+            </>
+          )}
+        </div>
       </div>
 
-      <div className="ff-sidebar-spacer" />
-
-      <div className="ff-footer-section">
-        <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesión">
-          <LogOut size={14} />
-          {!collapsed && <span>Salir</span>}
-        </button>
-        <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menú'}>
-          {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
-          {!collapsed && <span>Colapsar menú</span>}
-        </button>
+      {/* Footer — fixed */}
+      <div className="ff-sidebar-footer">
+        <div className="ff-divider" />
+        <div className="ff-footer-section">
+          <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesión">
+            <LogOut size={14} />
+            {!collapsed && <span>Salir</span>}
+          </button>
+          <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menú'}>
+            {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+            {!collapsed && <span>Colapsar menú</span>}
+          </button>
+        </div>
       </div>
     </aside>
   );
