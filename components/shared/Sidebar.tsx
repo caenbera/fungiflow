@@ -68,31 +68,31 @@ export function Sidebar() {
 
       {/* Header — fixed */}
       <div className="ff-sidebar-header">
-        <div className="ff-logo-section">
-          <div className="ff-logo-icon-wrap">
+        <div className="ff-sidebar-brand">
+          <div className="ff-sidebar-logo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="FungiFlow" width={42} height={42} className="ff-logo-img" />
+            <img src="/logo.png" alt="FungiFlow" />
           </div>
           {!collapsed && (
-            <div className="ff-logo-text">
-              <span className="ff-logo-name">FungiFlow</span>
-              <span className="ff-logo-sub">Plataforma Integral</span>
+            <div>
+              <div className="ff-sidebar-brand-title">FungiFlow</div>
+              <div className="ff-sidebar-brand-subtitle">Plataforma Integral</div>
             </div>
           )}
         </div>
-        <div className="ff-divider" />
+        <div className="ff-sidebar-divider" />
       </div>
 
       {/* Scroll Area — only this region scrolls */}
       <div className="ff-sidebar-scroll">
         {!collapsed && (
-          <div className="ff-user-section">
-            <div className="ff-user-avatar">
+          <div className="ff-sidebar-user">
+            <div className="ff-avatar">
               {user?.photoURL ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={user.photoURL} alt="" className="ff-user-photo" />
+                <img src={user.photoURL} alt="" />
               ) : (
-                <span className="ff-user-initials">{getInitials(user?.displayName, user?.email)}</span>
+                <div className="ff-avatar-initials">{getInitials(user?.displayName, user?.email)}</div>
               )}
             </div>
             <div className="ff-user-info">
@@ -151,7 +151,7 @@ export function Sidebar() {
 
       {/* Footer — fixed */}
       <div className="ff-sidebar-footer">
-        <div className="ff-divider" />
+        <div className="ff-sidebar-divider" />
         <div className="ff-footer-section">
           <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesión">
             <LogOut size={14} />
