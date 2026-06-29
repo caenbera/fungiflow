@@ -7,14 +7,36 @@ import { logout } from '@/lib/auth-actions';
 import { useAuthStore } from '@/store/auth';
 import { CurrencyToggle } from './CurrencyToggle';
 import {
-  LayoutDashboard, FileText, Calculator,
-  LogOut, ChevronLeft, ChevronRight, Star, ChevronDown,
+  LayoutDashboard,
+  FileText,
+  Calculator,
+  Users,
+  Package,
+  ClipboardList,
+  ShoppingCart,
+  Truck,
+  BarChart3,
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+  Crown,
+  ChevronDown,
+  Boxes,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { href: '/dashboard',    label: 'Dashboard',    icon: LayoutDashboard },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/cotizaciones', label: 'Cotizaciones', icon: FileText },
-  { href: '/calculadoras', label: 'Calculadoras', icon: Calculator },
+  { href: '#clientes', label: 'Clientes', icon: Users },
+  { href: '#productos', label: 'Productos', icon: Package },
+  { href: '#inventario', label: 'Inventario', icon: ClipboardList },
+  { href: '#ordenes', label: 'Órdenes de compra', icon: Boxes },
+  { href: '#produccion', label: 'Producción', icon: ShoppingCart },
+  { href: '#logistica', label: 'Logística', icon: Truck },
+  { href: '#reportes', label: 'Reportes', icon: BarChart3 },
+  { href: '#configuracion', label: 'Configuración', icon: Settings },
+  { href: '/calculadoras', label: 'Calculadoras', icon: Calculator, compactOnly: true },
 ];
 
 function getInitials(name?: string | null, email?: string | null) {
@@ -22,25 +44,30 @@ function getInitials(name?: string | null, email?: string | null) {
     const p = name.trim().split(' ');
     return (p[0][0] + (p[1]?.[0] ?? '')).toUpperCase();
   }
-  return email?.[0]?.toUpperCase() ?? 'U';
+  return email?.[0]?.toUpperCase() ?? 'CM';
 }
 
 export function Sidebar() {
   const pathname = usePathname();
-  const router   = useRouter();
+  const router = useRouter();
   const { user } = useAuthStore();
   const [collapsed, setCollapsed] = useState(false);
 
-  const handleLogout = async () => { await logout(); router.push('/login'); };
+  const handleLogout = async () => {
+    await logout();
+    router.push('/login');
+  };
+
+  const visibleItems = NAV_ITEMS.filter((item) => !item.compactOnly || pathname.startsWith('/calculadoras'));
 
   return (
-    <aside className="ff-sidebar" style={{ width: collapsed ? 68 : 232 }}>
+    <aside className={collapsed ? 'ff-sidebar ff-sidebar--collapsed' : 'ff-sidebar'} style={{ width: collapsed ? 78 : 252 }}>
+      <div className="ff-sidebar-glow" />
 
-      {/* ══ LOGO ══ */}
       <div className="ff-section ff-logo-section">
         <div className="ff-logo-icon-wrap">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://i.postimg.cc/DzDbvHmK/logo-original.png" alt="" width={30} height={30} className="ff-logo-img" />
+          <img src="/logo.png" alt="FungiFlow" width={42} height={42} className="ff-logo-img" />
         </div>
         {!collapsed && (
           <div className="ff-logo-text">
@@ -52,100 +79,96 @@ export function Sidebar() {
 
       <div className="ff-divider" />
 
-      {/* ══ USUARIO ══ */}
       {!collapsed && (
-        <>
-          <div className="ff-section ff-user-section">
-            <div className="ff-user-avatar">
-              {user?.photoURL
-                // eslint-disable-next-line @next/next/no-img-element
-                ? <img src={user.photoURL} alt="" className="ff-user-photo" />
-                : <span className="ff-user-initials">{getInitials(user?.displayName, user?.email)}</span>
-              }
-            </div>
-            <div className="ff-user-info">
-              <span className="ff-user-name">{user?.displayName?.split(' ').slice(0,2).join(' ') || 'Usuario'}</span>
-              <span className="ff-user-role">Administrador</span>
-            </div>
-            <ChevronDown size={13} className="ff-user-chevron" />
+        <div className="ff-section ff-user-section">
+          <div className="ff-user-avatar">
+            {user?.photoURL ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={user.photoURL} alt="" className="ff-user-photo" />
+            ) : (
+              <span className="ff-user-initials">{getInitials(user?.displayName, user?.email)}</span>
+            )}
           </div>
-          <div className="ff-divider" />
-        </>
+          <div className="ff-user-info">
+            <span className="ff-user-name">{user?.displayName?.split(' ').slice(0, 2).join(' ') || 'Carlos Mendoza'}</span>
+            <span className="ff-user-role">Administrador</span>
+          </div>
+          <ChevronDown size={14} className="ff-user-chevron" />
+        </div>
       )}
 
-      {/* ══ NAVEGACIÓN ══ */}
       <nav className="ff-nav-section">
-        {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
-          const active = pathname.startsWith(href);
-          return (
-            <Link key={href} href={href} title={collapsed ? label : undefined}
-              className={`ff-nav-item ${active ? 'ff-nav-item--active' : ''}`}>
-              <span className={`ff-nav-icon ${active ? 'ff-nav-icon--active' : ''}`}>
-                <Icon size={16} strokeWidth={active ? 2.5 : 1.8} />
+        {visibleItems.map(({ href, label, icon: Icon }) => {
+          const isRealRoute = href.startsWith('/');
+          const active = isRealRoute && pathname.startsWith(href);
+          const itemClass = 'ff-nav-item ' + (active ? 'ff-nav-item--active ' : '') + (!isRealRoute ? 'ff-nav-item--disabled' : '');
+          const content = (
+            <>
+              <span className={'ff-nav-icon ' + (active ? 'ff-nav-icon--active' : '')}>
+                <Icon size={18} strokeWidth={active ? 2.5 : 2} />
               </span>
               {!collapsed && <span className="ff-nav-label">{label}</span>}
+            </>
+          );
+
+          return isRealRoute ? (
+            <Link key={href} href={href} title={collapsed ? label : undefined} className={itemClass}>
+              {content}
             </Link>
+          ) : (
+            <button key={href} type="button" title={collapsed ? label : undefined} className={itemClass}>
+              {content}
+            </button>
           );
         })}
       </nav>
 
-      <div className="ff-divider" />
-
-      {/* ══ MONEDA ══ */}
       {!collapsed && (
-        <>
-          <div className="ff-section" style={{ paddingTop: 10, paddingBottom: 10 }}>
-            <CurrencyToggle dark />
-          </div>
-          <div className="ff-divider" />
-        </>
+        <div className="ff-section ff-currency-panel">
+          <CurrencyToggle dark />
+        </div>
       )}
 
-      {/* ══ PLAN PREMIUM ══ */}
-      <div className="ff-section ff-premium-section">
+      <div className="ff-premium-section">
         <div className="ff-premium-header">
-          <span className="ff-premium-star"><Star size={11} /></span>
+          <span className="ff-premium-star"><Crown size={17} /></span>
           {!collapsed && <span className="ff-premium-title">Plan Premium</span>}
         </div>
         {!collapsed && (
           <>
+            <div className="ff-premium-art">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/hongo-sidebar.png" alt="" />
+            </div>
             <p className="ff-premium-desc">Funciones avanzadas y almacenamiento ilimitado.</p>
             <button className="ff-premium-btn">Ver planes</button>
           </>
         )}
       </div>
 
-      {/* ══ FLEX SPACER ══ */}
-      <div style={{ flex: 1 }} />
+      <div className="ff-sidebar-spacer" />
 
-      {/* ══ HONGOS — integrados en la superficie ══ */}
       {!collapsed && (
         <div className="ff-fungi-zone">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/musgo-inferior-izquierda.png"  alt="" className="ff-fungi-moss"   />
+          <img src="/musgo-inferior-izquierda.png" alt="" className="ff-fungi-moss" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/hongo-sidebar.png"             alt="" className="ff-fungi-center" />
+          <img src="/hongo-sidebar.png" alt="" className="ff-fungi-center" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/hongo-inferior-derecho.png"    alt="" className="ff-fungi-right"  />
-          {/* Gradiente de fusión superior */}
+          <img src="/hongo-inferior-derecho.png" alt="" className="ff-fungi-right" />
           <div className="ff-fungi-fade" />
         </div>
       )}
 
-      {/* ══ FOOTER / COLAPSAR ══ */}
       <div className="ff-footer-section">
-        {!collapsed && (
-          <button onClick={handleLogout} className="ff-logout-btn">
-            <LogOut size={13} />
-          </button>
-        )}
-        <button onClick={() => setCollapsed(v => !v)} className="ff-collapse-btn"
-          title={collapsed ? 'Expandir' : 'Colapsar menú'}>
-          {collapsed ? <ChevronRight size={13} /> : <ChevronLeft size={13} />}
+        <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesión">
+          <LogOut size={14} />
+        </button>
+        <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menú'}>
+          {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
         </button>
         {!collapsed && <span className="ff-collapse-label">Colapsar menú</span>}
       </div>
-
     </aside>
   );
 }
