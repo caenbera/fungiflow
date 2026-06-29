@@ -245,6 +245,18 @@
   /* Components WITH texture: Sidebar, Premium Card, Dark Panels, Footer Sidebar */
   /* Components WITHOUT texture: Buttons, Inputs, Light Cards, Tables, Modals, Active Item, Avatar */
 
+  /* ME-08 · Elevation Engine — depth hierarchy, maps to ME-04 shadow levels */
+  /* Each component belongs to exactly ONE elevation level. Never combine. */
+
+  --ff-elevation-0: 0;  /* Body, Background, Layout, Canvas */
+  --ff-elevation-1: 1;  /* Inputs, Badges, Tags, Small Chips */
+  --ff-elevation-2: 2;  /* Buttons, Cards, Selects, Tables */
+  --ff-elevation-3: 3;  /* Sidebar, Floating Panels, Navigation, Dialogs */
+  --ff-elevation-4: 4;  /* Premium Card, Hero Banner, Dashboard Hero */
+
+  /* Component elevation tokens (declare on each component) */
+  /* Usage: --ff-component-elevation: var(--ff-elevation-3); */
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
