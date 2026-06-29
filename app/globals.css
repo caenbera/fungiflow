@@ -102,6 +102,35 @@
   --ff-state-disabled-bg:  var(--ff-material-neutral-200);
   --ff-state-disabled-color: var(--ff-text-muted);
 
+  /* ME-03 · Lighting Engine — single light source at 325° (top-right) */
+
+  /* Light opacities */
+  --ff-light-key-opacity:    .22;
+  --ff-light-fill-opacity:   .08;
+  --ff-light-rim-opacity:    .14;
+  --ff-light-bounce-opacity: .05;
+  --ff-light-ao-opacity:     .10;
+
+  /* Light colors */
+  --ff-light-key-color:    rgba(255, 245, 222, .22);  /* key — warm white, top-right */
+  --ff-light-fill-color:   rgba(255, 255, 255, .08);  /* fill — neutral, top-center */
+  --ff-light-rim-color:    rgba(255, 240, 210, .14);  /* rim — warm, right edge */
+  --ff-light-bounce-color: rgba(214, 167,  58, .05);  /* bounce — gold warm, bottom-right */
+  --ff-light-ao-color:     rgba(  0,   0,   0, .10);  /* AO — dark, bottom-left + inner edges */
+
+  /* Highlight position (key light origin) */
+  --ff-highlight-x:      98%;
+  --ff-highlight-y:       2%;
+  --ff-highlight-radius: 34%;
+
+  /* Composited lighting layers — apply as background-image in this order:
+     1 key · 2 fill · 3 rim · 4 bounce · 5 AO  (never alter order) */
+  --ff-lighting-key:    radial-gradient(circle at var(--ff-highlight-x) var(--ff-highlight-y), var(--ff-light-key-color), transparent var(--ff-highlight-radius));
+  --ff-lighting-fill:   linear-gradient(180deg, var(--ff-light-fill-color), transparent 45%);
+  --ff-lighting-rim:    linear-gradient(90deg, transparent, transparent 82%, var(--ff-light-rim-color));
+  --ff-lighting-bounce: radial-gradient(circle at 92% 96%, var(--ff-light-bounce-color), transparent 28%);
+  --ff-lighting-ao:     radial-gradient(circle at  4% 96%, var(--ff-light-ao-color),     transparent 32%);
+
   /* Legacy aliases — kept for backwards compat, map to ME-01 materials */
   --wood-900: var(--ff-material-wood-900);
   --wood-700: var(--ff-material-wood-700);
