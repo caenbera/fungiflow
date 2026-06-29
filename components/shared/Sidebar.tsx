@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -31,11 +31,11 @@ const NAV_ITEMS = [
   { href: '#clientes', label: 'Clientes', icon: Users },
   { href: '#productos', label: 'Productos', icon: Package },
   { href: '#inventario', label: 'Inventario', icon: ClipboardList },
-  { href: '#ordenes', label: 'Órdenes de compra', icon: Boxes },
-  { href: '#produccion', label: 'Producción', icon: ShoppingCart },
-  { href: '#logistica', label: 'Logística', icon: Truck },
+  { href: '#ordenes', label: 'Ã“rdenes de compra', icon: Boxes },
+  { href: '#produccion', label: 'ProducciÃ³n', icon: ShoppingCart },
+  { href: '#logistica', label: 'LogÃ­stica', icon: Truck },
   { href: '#reportes', label: 'Reportes', icon: BarChart3 },
-  { href: '#configuracion', label: 'Configuración', icon: Settings },
+  { href: '#configuracion', label: 'ConfiguraciÃ³n', icon: Settings },
   { href: '/calculadoras', label: 'Calculadoras', icon: Calculator, compactOnly: true },
 ];
 
@@ -136,10 +136,6 @@ export function Sidebar() {
         </div>
         {!collapsed && (
           <>
-            <div className="ff-premium-art">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/hongo-sidebar.png" alt="" />
-            </div>
             <p className="ff-premium-desc">Funciones avanzadas y almacenamiento ilimitado.</p>
             <button className="ff-premium-btn">Ver planes</button>
           </>
@@ -153,21 +149,19 @@ export function Sidebar() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/musgo-inferior-izquierda.png" alt="" className="ff-fungi-moss" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/hongo-sidebar.png" alt="" className="ff-fungi-center" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/hongo-inferior-derecho.png" alt="" className="ff-fungi-right" />
           <div className="ff-fungi-fade" />
         </div>
       )}
 
       <div className="ff-footer-section">
-        <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesión">
+        <button onClick={handleLogout} className="ff-logout-btn" title="Cerrar sesiÃ³n">
           <LogOut size={14} />
         </button>
-        <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menú'}>
+        <button onClick={() => setCollapsed((v) => !v)} className="ff-collapse-btn" title={collapsed ? 'Expandir' : 'Colapsar menÃº'}>
           {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
         </button>
-        {!collapsed && <span className="ff-collapse-label">Colapsar menú</span>}
+        {!collapsed && <span className="ff-collapse-label">Colapsar menÃº</span>}
       </div>
     </aside>
   );
