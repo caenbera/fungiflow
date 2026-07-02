@@ -445,7 +445,6 @@
   .app-shell-3d {
     background:
       radial-gradient(circle at 18% 0%, rgba(255,255,255,0.80), transparent 26rem),
-      radial-gradient(circle at 100% 100%, rgba(120,141,66,0.15), transparent 28rem),
       linear-gradient(135deg, #F7F3ED 0%, #EFE6DA 100%);
   }
 
@@ -1054,13 +1053,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 42px;
-  padding: 0 12px;
-  border-radius: 13px;
-  border: none;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(200,140,60,.20);
   cursor: pointer;
-  background: transparent;
-  color: rgba(220,175,110,.60);
+  background: linear-gradient(155deg, rgba(255,255,255,.08) 0%, rgba(0,0,0,.10) 100%);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,210,130,.15),
+    inset 0 -1px 4px rgba(0,0,0,.18);
+  color: rgba(240,210,150,.90);
   font-size: 13px;
   font-weight: 600;
   text-align: left;
@@ -1069,17 +1072,19 @@
 }
 
 .ff-footer-btn:hover {
-  background: rgba(255,255,255,.06);
+  background: linear-gradient(155deg, rgba(255,255,255,.13) 0%, rgba(0,0,0,.08) 100%);
   box-shadow:
-    0 3px 8px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,210,130,.10);
+    0 6px 14px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,210,130,.22),
+    inset 0 -1px 4px rgba(0,0,0,.15);
   transform: translateX(3px);
+  color: #fff;
 }
 
 .ff-footer-btn:active { transform: translateX(2px) scale(.98); }
 
-.ff-footer-exit:hover { color: #F08070; }
-.ff-footer-collapse:hover { color: #F5CC60; }
+.ff-footer-exit:hover { color: #F09080; border-color: rgba(240,100,80,.25); }
+.ff-footer-collapse:hover { color: #F5CC60; border-color: rgba(245,200,66,.28); }
 
 /* ── COLLAPSED MODE ── */
 .ff-sidebar--collapsed .ff-sidebar-brand,
