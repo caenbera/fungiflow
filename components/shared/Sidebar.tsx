@@ -24,7 +24,7 @@ const NAV_ITEMS = [
   { href: '#logistica',     label: 'Logística',        icon: Truck },
   { href: '#reportes',      label: 'Reportes',         icon: BarChart3 },
   { href: '#configuracion', label: 'Configuración',    icon: Settings },
-  { href: '/calculadoras',  label: 'Calculadoras',     icon: Calculator, compactOnly: true },
+  { href: '/calculadoras',  label: 'Calculadoras',     icon: Calculator },
 ];
 
 function getInitials(name?: string | null, email?: string | null) {
