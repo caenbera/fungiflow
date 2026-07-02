@@ -39,23 +39,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="app-shell-3d flex h-screen overflow-hidden">
       <Sidebar />
       <main className="page-surface relative flex-1 overflow-y-auto">
-        {/* Moss — fixed to viewport bottom-left corner, above sidebar */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/musgo-inferior-izquierda.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none select-none"
-          style={{
-            position: 'fixed',
-            bottom: '-10px',
-            left: '-8px',
-            width: '260px',
-            zIndex: 40,
-            opacity: 0.95,
-            filter: 'drop-shadow(0 -8px 24px rgba(0,0,0,0.18))',
-          }}
-        />
         {/* Mushroom — fixed to viewport bottom-right corner, above cards */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
