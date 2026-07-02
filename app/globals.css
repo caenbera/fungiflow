@@ -584,7 +584,8 @@
 /* ── CONTENEDOR PRINCIPAL ── */
 .ff-sidebar {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 20px);
+  margin: 10px 0 10px 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
