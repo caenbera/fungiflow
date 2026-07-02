@@ -1046,26 +1046,7 @@
   padding: 10px 2px 4px;
   border-top: 1px solid rgba(255,210,130,.10);
   margin-top: 6px;
-  overflow: hidden;
-  border-radius: 0 0 20px 20px;
 }
-
-/* Musgo en L — imagen posicionada en esquina inferior izquierda */
-.ff-sidebar-footer::before {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: -14px;
-  width: 200px;
-  height: 160px;
-  background: url("/musgo.png") bottom left / contain no-repeat;
-  pointer-events: none;
-  z-index: 0;
-  opacity: .92;
-}
-
-/* sin uso — limpio */
-.ff-sidebar-footer::after { content: none; }
 
 .ff-footer-btn {
   position: relative;
