@@ -43,7 +43,7 @@ export function Sidebar() {
 
   const handleLogout = async () => { await logout(); router.push('/login'); };
 
-  const visibleItems = NAV_ITEMS.filter(i => !i.compactOnly || pathname.startsWith('/calculadoras'));
+  const visibleItems = NAV_ITEMS;
 
   return (
     <aside className={`ff-sidebar${collapsed ? ' ff-sidebar--collapsed' : ''}`}
