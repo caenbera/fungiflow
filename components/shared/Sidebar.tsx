@@ -6,55 +6,25 @@ import { usePathname, useRouter } from 'next/navigation';
 import { logout } from '@/lib/auth-actions';
 import { useAuthStore } from '@/store/auth';
 import { CurrencyToggle } from './CurrencyToggle';
-import { ChevronDown } from 'lucide-react';
-
-const B = 'https://i.postimg.cc';
+import {
+  LayoutDashboard, FileText, Users, Package,
+  ClipboardList, ShoppingCart, Truck, BarChart3,
+  Settings, LogOut, ChevronLeft, ChevronRight,
+  Crown, ChevronDown, Boxes, Calculator,
+} from 'lucide-react';
 
 const NAV_ITEMS = [
-  {
-    href: '/dashboard', label: 'Dashboard',
-    icons: { default: `${B}/sDMdJkhP/dashboard-hover-01.png`, active: `${B}/kX23y0bF/dashboard-active-01.png` },
-  },
-  {
-    href: '/cotizaciones', label: 'Cotizaciones',
-    icons: { default: `${B}/JnKVTmxG/cotizaciones-default-01.png`, active: `${B}/d1nPWv6D/cotizaciones-active-01.png` },
-  },
-  {
-    href: '#clientes', label: 'Clientes',
-    icons: { default: `${B}/qqbr70Ct/clientes-default-01.png`, active: `${B}/yxQKNBSg/clientes-active-01.png` },
-  },
-  {
-    href: '#productos', label: 'Productos',
-    icons: { default: `${B}/502k2z56/productos-default-01.png`, active: `${B}/HxkPkM0r/productos-active-01.png` },
-  },
-  {
-    href: '#inventario', label: 'Inventario',
-    icons: { default: `${B}/CKV3Sd6N/inventario-default-01.png`, active: `${B}/JzXffjx9/inventario-active-01.png` },
-  },
-  {
-    href: '#ordenes', label: 'Órdenes de compra',
-    icons: { default: `${B}/KcsC40Hn/ordenes-compra-default-01.png`, active: `${B}/9XNszLnT/ordenes-compra-active-01.png` },
-  },
-  {
-    href: '#produccion', label: 'Producción',
-    icons: { default: `${B}/g237SmkL/produccion-default-01.png`, active: `${B}/HkbNZdsV/produccion-active-01.png` },
-  },
-  {
-    href: '#logistica', label: 'Logística',
-    icons: { default: `${B}/0jr3cSrL/logistica-default-01.png`, active: `${B}/T1hSCbhz/logistica-active-01.png` },
-  },
-  {
-    href: '#reportes', label: 'Reportes',
-    icons: { default: `${B}/mkcXQG5L/reportes-default-01.png`, active: `${B}/GtB7k153/reportes-active-01.png` },
-  },
-  {
-    href: '#configuracion', label: 'Configuración',
-    icons: { default: `${B}/CKGVqbfJ/configuracion-default-01.png`, active: `${B}/GpF1yvsK/configuracion-active-01.png` },
-  },
-  {
-    href: '/calculadoras', label: 'Calculadoras', compactOnly: true,
-    icons: { default: `${B}/CKGVqbfJ/configuracion-default-01.png`, active: `${B}/GpF1yvsK/configuracion-active-01.png` },
-  },
+  { href: '/dashboard',     label: 'Dashboard',        icon: LayoutDashboard },
+  { href: '/cotizaciones',  label: 'Cotizaciones',     icon: FileText },
+  { href: '#clientes',      label: 'Clientes',         icon: Users },
+  { href: '#productos',     label: 'Productos',        icon: Package },
+  { href: '#inventario',    label: 'Inventario',       icon: ClipboardList },
+  { href: '#ordenes',       label: 'Órdenes de compra',icon: Boxes },
+  { href: '#produccion',    label: 'Producción',       icon: ShoppingCart },
+  { href: '#logistica',     label: 'Logística',        icon: Truck },
+  { href: '#reportes',      label: 'Reportes',         icon: BarChart3 },
+  { href: '#configuracion', label: 'Configuración',    icon: Settings },
+  { href: '/calculadoras',  label: 'Calculadoras',     icon: Calculator, compactOnly: true },
 ];
 
 function getInitials(name?: string | null, email?: string | null) {
@@ -71,127 +41,101 @@ export function Sidebar() {
   const { user } = useAuthStore();
   const [collapsed, setCollapsed] = useState(false);
 
-  const handleLogout = async () => {
-    await logout();
-    router.push('/login');
-  };
+  const handleLogout = async () => { await logout(); router.push('/login'); };
 
-  const visibleItems = NAV_ITEMS.filter((item) => !item.compactOnly || pathname.startsWith('/calculadoras'));
+  const visibleItems = NAV_ITEMS.filter(i => !i.compactOnly || pathname.startsWith('/calculadoras'));
 
   return (
-    <aside className={`ff-sidebar${collapsed ? ' ff-sidebar--collapsed' : ''}`}>
-      {/* Ambient light overlay — z-index 2, above wood/frame pseudo-elements */}
-      <div className="ff-sidebar-light" aria-hidden="true" />
+    <aside className={`ff-sidebar${collapsed ? ' ff-sidebar--collapsed' : ''}`}
+           style={{ width: collapsed ? 76 : 272 }}>
 
-      {/* All content above the PNG layers */}
-      <div className="ff-sidebar-content">
-
-        {/* Header */}
-        <div className="ff-sidebar-header">
-          <div className="ff-sidebar-logo">
-            <div className="ff-sidebar-logo-base" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`${B}/CKcsmLX4/logo-01.png`} alt="FungiFlow" />
-          </div>
-          {!collapsed && (
-            <div className="ff-sidebar-brand">
-              <div className="ff-sidebar-brand-title">FungiFlow</div>
-              <div className="ff-sidebar-brand-subtitle">Plataforma Integral</div>
-            </div>
-          )}
+      {/* ── HEADER ── */}
+      <div className="ff-sidebar-header">
+        <div className="ff-sidebar-logo">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="FungiFlow" />
         </div>
+        {!collapsed && (
+          <div className="ff-sidebar-brand">
+            <span className="ff-sidebar-brand-title">FungiFlow</span>
+            <span className="ff-sidebar-brand-subtitle">Plataforma Integral</span>
+          </div>
+        )}
+      </div>
+
+      {/* ── SCROLL AREA ── */}
+      <div className="ff-sidebar-scroll">
 
         {/* User Card */}
         {!collapsed && (
-          <>
-            <div className="ff-sidebar-user">
-              <div className="ff-avatar">
-                {user?.photoURL ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={user.photoURL} alt="" />
-                ) : (
-                  <div className="ff-avatar-initials">{getInitials(user?.displayName, user?.email)}</div>
-                )}
-              </div>
-              <div className="ff-user-info">
-                <span className="ff-user-name">{user?.displayName?.split(' ').slice(0, 2).join(' ') || 'Carlos Mendoza'}</span>
-                <span className="ff-user-role">Administrador</span>
-              </div>
-              <ChevronDown size={14} className="ff-user-chevron" />
+          <div className="ff-sidebar-user">
+            <div className="ff-avatar">
+              {user?.photoURL
+                // eslint-disable-next-line @next/next/no-img-element
+                ? <img src={user.photoURL} alt="" />
+                : <span className="ff-avatar-initials">{getInitials(user?.displayName, user?.email)}</span>
+              }
             </div>
-            <div className="ff-sidebar-divider" />
-          </>
+            <div className="ff-user-info">
+              <span className="ff-user-name">{user?.displayName?.split(' ').slice(0,2).join(' ') || 'Carlos Mendoza'}</span>
+              <span className="ff-user-role">Administrador</span>
+            </div>
+            <ChevronDown size={14} className="ff-user-chevron" />
+          </div>
         )}
 
-        {/* Navigation */}
+        {/* Nav */}
         <nav className="ff-sidebar-nav">
-          {visibleItems.map(({ href, label, icons }) => {
-            const isRealRoute = href.startsWith('/');
-            const active = isRealRoute && pathname.startsWith(href);
-            const cls = `ff-sidebar-item${active ? ' active' : ''}${!isRealRoute ? ' disabled' : ''}`;
-
+          {visibleItems.map(({ href, label, icon: Icon }) => {
+            const isReal = href.startsWith('/');
+            const active = isReal && pathname.startsWith(href);
+            const cls = `ff-nav-item${active ? ' active' : ''}${!isReal ? ' disabled' : ''}`;
             const inner = (
               <>
-                <div className="ff-active-shadow" aria-hidden="true" />
-                <div className="ff-active-button" aria-hidden="true" />
-                <span className="ff-sidebar-icon">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={active ? icons.active : icons.default} alt="" width={34} height={34} />
+                <span className={`ff-nav-icon${active ? ' active' : ''}`}>
+                  <Icon size={18} strokeWidth={active ? 2.5 : 2} />
                 </span>
-                {!collapsed && <span className="ff-sidebar-label">{label}</span>}
+                {!collapsed && <span className="ff-nav-label">{label}</span>}
               </>
             );
-
-            return isRealRoute ? (
-              <Link key={href} href={href} title={collapsed ? label : undefined} className={cls}>
-                {inner}
-              </Link>
-            ) : (
-              <button key={href} type="button" title={collapsed ? label : undefined} className={cls}>
-                {inner}
-              </button>
-            );
+            return isReal
+              ? <Link key={href} href={href} className={cls} title={collapsed ? label : undefined}>{inner}</Link>
+              : <button key={href} type="button" className={cls} title={collapsed ? label : undefined}>{inner}</button>;
           })}
         </nav>
 
-        {/* Currency Toggle */}
+        {/* Currency */}
         {!collapsed && (
           <div className="ff-currency-panel">
             <CurrencyToggle dark />
           </div>
         )}
 
-        {/* Premium Card */}
-        {!collapsed && (
-          <div className="ff-premium-section">
-            <div className="ff-premium-shadow" />
-            <div className="ff-premium-base" />
-            <div className="ff-premium-glow" />
-            <div className="ff-premium-crown" />
-            <span className="ff-premium-title">Plan Premium</span>
-            <p className="ff-premium-desc">Accede a funciones avanzadas y más espacio de almacenamiento.</p>
-            <div className="ff-premium-mushroom" />
-            <div className="ff-premium-btn-shadow" />
-            <button className="ff-premium-btn">Ver planes</button>
-          </div>
-        )}
-
-        {/* Footer */}
-        <div className="ff-sidebar-footer">
-          <button onClick={handleLogout} className="ff-footer-item ff-footer-exit" title="Cerrar sesión">
-            <div className="ff-footer-round">
-              <div className="ff-footer-round-base" />
-            </div>
-            {!collapsed && <span className="ff-footer-label">Salir</span>}
-          </button>
-          <button onClick={() => setCollapsed((v) => !v)} className="ff-footer-item ff-footer-collapse" title={collapsed ? 'Expandir' : 'Colapsar menú'}>
-            <div className="ff-footer-round">
-              <div className="ff-footer-round-base" />
-            </div>
-            {!collapsed && <span className="ff-footer-label">Colapsar menú</span>}
-          </button>
+        {/* Premium */}
+        <div className="ff-premium-card">
+          <div className="ff-premium-icon"><Crown size={16} /></div>
+          {!collapsed && (
+            <>
+              <p className="ff-premium-label">Plan Premium</p>
+              <p className="ff-premium-sub">Funciones avanzadas y almacenamiento ilimitado.</p>
+              <button className="ff-premium-btn">Ver planes</button>
+            </>
+          )}
         </div>
 
+      </div>
+
+      {/* ── FOOTER ── */}
+      <div className="ff-sidebar-footer">
+        <button onClick={handleLogout} className="ff-footer-btn ff-footer-exit" title="Cerrar sesión">
+          <LogOut size={15} />
+          {!collapsed && <span>Salir</span>}
+        </button>
+        <button onClick={() => setCollapsed(v => !v)} className="ff-footer-btn ff-footer-collapse"
+                title={collapsed ? 'Expandir' : 'Colapsar'}>
+          {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+          {!collapsed && <span>Colapsar</span>}
+        </button>
       </div>
     </aside>
   );
