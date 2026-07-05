@@ -25,7 +25,7 @@ export default function RegisterPage() {
           {/* Mobile logo */}
           <div className="flex justify-center mb-8 lg:hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="FungiFlow" className="w-14 h-14 object-contain" />
+            <img src="/logo.png" alt="FungiFlow" className="w-24 h-24 object-contain" />
           </div>
 
           {/* Heading */}

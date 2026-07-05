@@ -5,12 +5,34 @@ import Image from 'next/image';
 
 const SLIDES = Array.from({ length: 14 }, (_, i) => `/carousel/${String(i + 1).padStart(2, '0')}.png`);
 
-const INTERVAL = 7000;
+const INTERVAL = 2000;
 
 const FEATURES = [
-  { icon: '📊', text: 'Control total de tu producción' },
-  { icon: '🎯', text: 'Decisiones basadas en datos' },
-  { icon: '🌱', text: 'Mayor rentabilidad y eficiencia' },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+        <path d="M14 17h7M17 14v7"/>
+      </svg>
+    ),
+    text: 'Control total de tu producción',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+        <path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-6"/>
+      </svg>
+    ),
+    text: 'Decisiones basadas en datos',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+        <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+      </svg>
+    ),
+    text: 'Mayor rentabilidad y eficiencia',
+  },
 ];
 
 export function AuthCarousel() {
@@ -57,14 +79,10 @@ export function AuthCarousel() {
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70" />
 
-      {/* Logo + brand */}
-      <div className="absolute top-8 left-0 right-0 flex flex-col items-center gap-2 z-10">
+      {/* Logo */}
+      <div className="absolute top-8 left-0 right-0 flex justify-center z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="FungiFlow" className="w-16 h-16 object-contain drop-shadow-lg" />
-        <span className="text-white font-bold text-xl tracking-wide drop-shadow-md"
-              style={{ fontFamily: 'var(--font-serif, serif)' }}>
-          FungiFlow
-        </span>
+        <img src="/logo.png" alt="FungiFlow" className="w-24 h-24 object-contain drop-shadow-lg" />
       </div>
 
       {/* Center text */}
