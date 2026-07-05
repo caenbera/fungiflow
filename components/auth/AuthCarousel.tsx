@@ -82,7 +82,7 @@ export function AuthCarousel() {
       {/* Logo */}
       <div className="absolute top-8 left-0 right-0 flex justify-center z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="FungiFlow" className="w-24 h-24 object-contain drop-shadow-lg" />
+        <img src="/logo.png" alt="FungiFlow" className="w-36 h-36 object-contain drop-shadow-lg" />
       </div>
 
       {/* Center text */}
@@ -105,7 +105,7 @@ export function AuthCarousel() {
             key={text}
             className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-xl px-3 py-2 border border-white/15"
           >
-            <span className="text-lg">{icon}</span>
+            <span className="text-white">{icon}</span>
             <span className="text-white/90 text-xs font-medium leading-tight max-w-[90px]">{text}</span>
           </div>
         ))}
