@@ -60,51 +60,79 @@ export function LoginForm() {
     }
   };
 
-  const inputClass = "h-11 bg-black/25 border-white/30 text-white placeholder:text-white/50 focus:border-green-400 focus:bg-black/30";
-  const labelClass = "text-white font-medium text-sm";
-
   return (
-    <div className="w-full max-w-sm mx-auto space-y-5">
+    <div className="w-full space-y-5">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="space-y-1">
-          <Label htmlFor="email" className={labelClass}>Email</Label>
-          <Input id="email" type="email" placeholder="tu@email.com" className={inputClass} {...register('email')} />
-          {errors.email && <p className="text-xs text-red-400">{errors.email.message}</p>}
+        <div className="space-y-1.5">
+          <Label htmlFor="email" className="text-sm font-semibold text-[#3d2010] dark:text-[#f0dfc0]">
+            Email
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="tu@email.com"
+            className="h-11 bg-white dark:bg-[#1e1008] border-[#d4c4a8] dark:border-[#5a3a1a] text-[#3d2010] dark:text-[#f0dfc0] placeholder:text-[#a8927a] dark:placeholder:text-[#7a5a3a] focus:border-[#7a4010] dark:focus:border-[#c07040] focus-visible:ring-[#7a4010]/20"
+            {...register('email')}
+          />
+          {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
         </div>
-        <div className="space-y-1">
-          <Label htmlFor="password" className={labelClass}>Contraseña</Label>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="password" className="text-sm font-semibold text-[#3d2010] dark:text-[#f0dfc0]">
+            Contraseña
+          </Label>
           <div className="relative">
             <Input
               id="password"
               type={showPass ? 'text' : 'password'}
               placeholder="••••••••"
-              className={inputClass}
+              className="h-11 bg-white dark:bg-[#1e1008] border-[#d4c4a8] dark:border-[#5a3a1a] text-[#3d2010] dark:text-[#f0dfc0] placeholder:text-[#a8927a] focus:border-[#7a4010] dark:focus:border-[#c07040] focus-visible:ring-[#7a4010]/20 pr-10"
               {...register('password')}
             />
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#a8927a] hover:text-[#7a4010] dark:hover:text-[#c07040] transition-colors"
             >
               {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
           </div>
-          {errors.password && <p className="text-xs text-red-400">{errors.password.message}</p>}
+          {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
         </div>
 
-        <Button type="submit" className="w-full bg-green-700 hover:bg-green-600 text-white border-0 h-10" disabled={isSubmitting}>
+        <div className="flex items-center justify-between pt-1">
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={resetting}
+            className="text-xs text-[#7a4010] dark:text-[#c07040] hover:underline transition-colors"
+          >
+            {resetting ? 'Enviando...' : '¿Olvidaste tu contraseña?'}
+          </button>
+        </div>
+
+        <Button
+          type="submit"
+          className="w-full h-11 bg-[#7a4010] hover:bg-[#6a3510] dark:bg-[#c07040] dark:hover:bg-[#b06030] text-white font-semibold border-0 rounded-xl shadow-md hover:shadow-lg transition-all"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? 'Ingresando...' : 'Iniciar sesión'}
         </Button>
       </form>
 
       <div className="flex items-center gap-3">
-        <div className="flex-1 h-px bg-white/25" />
-        <span className="text-xs text-white/60">o</span>
-        <div className="flex-1 h-px bg-white/25" />
+        <div className="flex-1 h-px bg-[#e0d0bc] dark:bg-[#3a2010]" />
+        <span className="text-xs text-[#a8927a] dark:text-[#7a5a3a]">o</span>
+        <div className="flex-1 h-px bg-[#e0d0bc] dark:bg-[#3a2010]" />
       </div>
 
-      <Button type="button" variant="outline" className="w-full h-11 bg-black/25 border-white/30 text-white hover:bg-black/40 hover:text-white" onClick={handleGoogle}>
-        <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full h-11 bg-white dark:bg-[#1e1008] border-[#d4c4a8] dark:border-[#5a3a1a] text-[#3d2010] dark:text-[#f0dfc0] hover:bg-[#faf5ee] dark:hover:bg-[#2a1608] rounded-xl font-medium"
+        onClick={handleGoogle}
+      >
+        <svg className="w-4 h-4 mr-2 flex-shrink-0" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
           <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
@@ -113,14 +141,12 @@ export function LoginForm() {
         Continuar con Google
       </Button>
 
-      <div className="flex justify-between pt-1">
-        <button type="button" onClick={handleReset} disabled={resetting} className="text-white/60 hover:text-white text-xs transition-colors">
-          {resetting ? 'Enviando...' : '¿Olvidaste tu contraseña?'}
-        </button>
-        <Link href="/register" className="text-green-300 hover:text-green-200 font-medium text-xs">
+      <p className="text-center text-sm text-[#8a7060] dark:text-[#7a5a3a] pt-1">
+        ¿No tienes una cuenta?{' '}
+        <Link href="/register" className="text-[#7a4010] dark:text-[#c07040] font-semibold hover:underline">
           Registrarse
         </Link>
-      </div>
+      </p>
     </div>
   );
 }
