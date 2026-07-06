@@ -27,6 +27,7 @@ const ADMIN_ITEMS = [
   { href: '/productos',      label: 'Productos',         icon: Package },
   { href: '/inventario',    label: 'Inventario',        icon: ClipboardList },
   { href: '/ordenes',        label: 'Órdenes de compra', icon: Boxes },
+  { href: '/proveedores',    label: 'Proveedores',       icon: Building2 },
   { href: '/produccion',     label: 'Producción',        icon: ShoppingCart },
   { href: '/logistica',     label: 'Logística',         icon: Truck },
   { href: '/reportes',      label: 'Reportes',          icon: BarChart3 },
