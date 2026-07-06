@@ -110,6 +110,7 @@ function CotizacionCard({ cot }: { cot: Cotizacion }) {
 export default function CotizacionesPage() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('resumen');
   const { cotizaciones, loading } = useCotizacionesStore();
+  const { formatAmount, currency } = useCurrencyStore();
 
   const porCategoria = (cat: CategoriaCotizacion) =>
     cotizaciones.filter((c) => c.categoria === cat);
@@ -168,6 +169,7 @@ export default function CotizacionesPage() {
 
         {CATEGORIAS.map((cat) => {
           const lista = porCategoria(cat.value);
+          const totalCategoria = lista.reduce((acc, c) => acc + (c.total ?? 0), 0);
           const Icon = cat.icon;
           return (
             <TabsContent key={cat.value} value={cat.value} className="mt-5 space-y-5">
@@ -183,6 +185,15 @@ export default function CotizacionesPage() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {lista.map((cot) => <CotizacionCard key={cot.id} cot={cot} />)}
+                    <Separator />
+                    <div className="flex items-center justify-between px-1 pt-1">
+                      <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                        Total {cat.label}
+                      </p>
+                      <span className="rounded-full bg-[#4E652E] px-4 py-1.5 text-sm font-bold text-white shadow-[var(--shadow-soft-raised)]">
+                        {formatAmount(totalCategoria)} <CurrencyFlag currency={currency} />
+                      </span>
+                    </div>
                   </CardContent>
                 </Card>
               ) : null}
