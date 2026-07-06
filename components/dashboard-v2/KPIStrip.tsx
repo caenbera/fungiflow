@@ -28,7 +28,9 @@ export function KPIStrip() {
                 {up === null  && <Minus size={11} />}
               </span>
             </div>
-            <p className="text-xl font-extrabold text-[#302D28] leading-none">{value}</p>
+            <p className={`font-extrabold text-[#302D28] leading-none ${
+              value.length > 10 ? 'text-sm' : value.length > 7 ? 'text-base' : 'text-xl'
+            }`}>{value}</p>
             <p className="text-[11px] text-[#8A6D3D] font-semibold mt-1 leading-tight">{label}</p>
             <div className="accent-rule mt-2 w-7" />
             <p className={`text-[10px] font-semibold mt-1.5 ${up === true ? 'text-[#1a6040]' : up === false ? 'text-red-500' : 'text-[#A08060]'}`}>

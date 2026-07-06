@@ -22,20 +22,28 @@ export function TopBar() {
     return () => clearInterval(t);
   }, []);
 
-  const fecha = now.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  const hora  = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+  const fechaCompleta  = now.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const fechaCorta     = now.toLocaleDateString('es-CO', { weekday: 'short', day: 'numeric', month: 'short' });
+  const hora           = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+  const nombreCorto    = user?.displayName?.split(' ')[0] || 'Usuario';
 
   return (
-    <div className="surface-raised rounded-2xl px-5 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-3">
+    <div className="surface-raised rounded-2xl px-4 py-3 flex items-center justify-between gap-2">
+
+      {/* Date */}
+      <div className="flex items-center gap-2.5 min-w-0">
         <IconTile Icon={CalendarDays} from="#9a5020" to="#6a3010" size={17} tileSize={38} radius="0.7rem" />
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#8A6D3D] capitalize">{fecha}</p>
+        <div className="min-w-0">
+          {/* Mobile: short date */}
+          <p className="sm:hidden text-[11px] font-bold uppercase tracking-[0.12em] text-[#8A6D3D] capitalize truncate">{fechaCorta}</p>
+          {/* Desktop: full date */}
+          <p className="hidden sm:block text-xs font-bold uppercase tracking-[0.14em] text-[#8A6D3D] capitalize">{fechaCompleta}</p>
           <p className="text-sm font-semibold text-[#302D28]">{hora}</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* Actions */}
+      <div className="flex items-center gap-1.5 flex-shrink-0">
         <button className="relative hover:scale-105 transition-transform">
           <IconTile Icon={Bell} from="#b06000" to="#7a3a00" size={16} tileSize={36} radius="0.65rem" />
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-[9px] font-bold flex items-center justify-center border border-white">3</span>
@@ -45,7 +53,22 @@ export function TopBar() {
           <IconTile Icon={Mail} from="#1a5070" to="#0e3050" size={16} tileSize={36} radius="0.65rem" />
         </button>
 
-        <button className="surface-soft flex items-center gap-2.5 pl-3 pr-2.5 py-2 rounded-xl hover:scale-[1.02] transition-transform">
+        {/* Mobile: avatar only */}
+        <button className="sm:hidden surface-soft flex items-center gap-1.5 pl-2 pr-2 py-1.5 rounded-xl hover:scale-[1.02] transition-transform">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#8B5E2D] to-[#4B2E16] flex items-center justify-center text-white text-xs font-bold overflow-hidden flex-shrink-0 border border-white/50">
+            {user?.photoURL
+              ? <img src={user.photoURL} alt="" className="w-full h-full object-cover" />
+              : getInitials(user?.displayName, user?.email)
+            }
+          </div>
+          <div className="text-left">
+            <p className="text-[11px] font-bold text-[#302D28] leading-none truncate max-w-[72px]">{nombreCorto}</p>
+            <p className="text-[9px] text-[#8A6D3D] leading-none mt-0.5">Admin</p>
+          </div>
+        </button>
+
+        {/* Desktop: full user card */}
+        <button className="hidden sm:flex surface-soft items-center gap-2.5 pl-3 pr-2.5 py-2 rounded-xl hover:scale-[1.02] transition-transform">
           <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#8B5E2D] to-[#4B2E16] flex items-center justify-center text-white text-xs font-bold overflow-hidden flex-shrink-0 border border-white/50">
             {user?.photoURL
               ? <img src={user.photoURL} alt="" className="w-full h-full object-cover" />
