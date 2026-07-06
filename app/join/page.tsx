@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { JoinClient } from './JoinClient';
 
-const OG_IMAGE = 'https://i.postimg.cc/c48sPvkW/logo-fungiflow-1200x1200.png';
+const OG_IMAGE = 'https://i.postimg.cc/zfN28QJS/fungiflow-logo.webp';
 const TITLE    = '🍄 Te invitaron a FungiFlow';
 const DESC     = 'Únete al equipo y empieza a colaborar en la gestión integral del cultivo de hongos.';
 
