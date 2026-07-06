@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { logout } from '@/lib/auth-actions';
@@ -9,7 +9,7 @@ import { CurrencyToggle } from './CurrencyToggle';
 import {
   LayoutDashboard, FileText, Users, Package,
   ClipboardList, ShoppingCart, Truck, BarChart3,
-  Settings, LogOut, ChevronLeft, ChevronRight, CheckSquare,
+  Settings, LogOut, ChevronLeft, ChevronRight, CheckSquare, X,
   Crown, ChevronDown, Boxes, Calculator,
   Building2, CreditCard, Receipt, Layers,
   DollarSign, Shield, Key, ScrollText,
@@ -180,16 +180,32 @@ function NavSection({
 
 /* ── Sidebar ────────────────────────────────────────────── */
 
-export function Sidebar() {
+export function Sidebar({
+  mobileOpen = false,
+  onMobileClose,
+}: {
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, role } = useAuthStore();
   const [collapsed, setCollapsed] = useState(false);
   const isSuperAdmin = role === 'superadmin';
 
+  // Close mobile nav on route change
+  useEffect(() => { onMobileClose?.(); }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   const handleLogout = async () => { await logout(); router.push('/login'); };
 
-  return (
+  const sidebarPanel = (
     <aside
       className={`ff-sidebar${collapsed ? ' ff-sidebar--collapsed' : ''}`}
       style={{ width: collapsed ? 76 : 272 }}
@@ -208,6 +224,13 @@ export function Sidebar() {
             </span>
           </div>
         )}
+        {/* Close button — mobile only */}
+        <button
+          onClick={onMobileClose}
+          className="lg:hidden ml-auto flex items-center justify-center w-8 h-8 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition-colors flex-shrink-0"
+          aria-label="Cerrar menú">
+          <X size={18} />
+        </button>
       </div>
 
       {/* ── SCROLL AREA ── */}
@@ -302,7 +325,7 @@ export function Sidebar() {
         </button>
         <button
           onClick={() => setCollapsed(v => !v)}
-          className="ff-footer-btn ff-footer-collapse"
+          className="ff-footer-btn ff-footer-collapse hidden lg:flex"
           title={collapsed ? 'Expandir' : 'Colapsar'}
         >
           {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
@@ -310,5 +333,33 @@ export function Sidebar() {
         </button>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop sidebar — always visible on lg+ */}
+      <div className="hidden lg:block flex-shrink-0" style={{ width: collapsed ? 76 : 272 }}>
+        {sidebarPanel}
+      </div>
+
+      {/* Mobile drawer overlay */}
+      {mobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-50 flex"
+          onClick={onMobileClose}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+          {/* Panel — stop propagation so clicking inside doesn't close */}
+          <div
+            className="relative z-10 flex-shrink-0"
+            style={{ width: 272 }}
+            onClick={e => e.stopPropagation()}
+          >
+            {sidebarPanel}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
