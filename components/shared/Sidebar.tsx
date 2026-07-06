@@ -9,7 +9,7 @@ import { CurrencyToggle } from './CurrencyToggle';
 import {
   LayoutDashboard, FileText, Users, Package,
   ClipboardList, ShoppingCart, Truck, BarChart3,
-  Settings, LogOut, ChevronLeft, ChevronRight,
+  Settings, LogOut, ChevronLeft, ChevronRight, CheckSquare,
   Crown, ChevronDown, Boxes, Calculator,
   Building2, CreditCard, Receipt, Layers,
   DollarSign, Shield, Key, ScrollText,
@@ -23,15 +23,16 @@ import {
 const ADMIN_ITEMS = [
   { href: '/dashboard',     label: 'Dashboard',         icon: LayoutDashboard },
   { href: '/cotizaciones',  label: 'Cotizaciones',      icon: FileText },
-  { href: '#clientes',      label: 'Clientes',          icon: Users },
-  { href: '#productos',     label: 'Productos',         icon: Package },
-  { href: '#inventario',    label: 'Inventario',        icon: ClipboardList },
-  { href: '#ordenes',       label: 'Órdenes de compra', icon: Boxes },
-  { href: '#produccion',    label: 'Producción',        icon: ShoppingCart },
-  { href: '#logistica',     label: 'Logística',         icon: Truck },
-  { href: '#reportes',      label: 'Reportes',          icon: BarChart3 },
-  { href: '#configuracion', label: 'Configuración',     icon: Settings },
+  { href: '/clientes',       label: 'Clientes',          icon: Users },
+  { href: '/productos',      label: 'Productos',         icon: Package },
+  { href: '/inventario',    label: 'Inventario',        icon: ClipboardList },
+  { href: '/ordenes',        label: 'Órdenes de compra', icon: Boxes },
+  { href: '/produccion',     label: 'Producción',        icon: ShoppingCart },
+  { href: '/logistica',     label: 'Logística',         icon: Truck },
+  { href: '/reportes',      label: 'Reportes',          icon: BarChart3 },
+  { href: '/configuracion', label: 'Configuración',     icon: Settings },
   { href: '/calculadoras',  label: 'Calculadoras',      icon: Calculator },
+  { href: '/checklists',   label: 'Listas de Chequeo', icon: CheckSquare },
 ];
 
 const SUPERADMIN_GROUPS = [

@@ -6,13 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Trash2, ChevronDown, ChevronUp, FileText } from 'lucide-react';
+import { Trash2, ChevronDown, ChevronUp, FileText, ChartNoAxesCombined } from 'lucide-react';
 import { useCotizacionesStore } from '@/store/cotizaciones';
 import { useCurrencyStore } from '@/store/currency';
 import { eliminarCotizacion } from '@/lib/firestore';
 import { CurrencyFlag } from '@/components/shared/CurrencyFlag';
+import { ResumenDashboard } from '@/components/dashboard/ResumenDashboard';
 import { toast } from 'sonner';
 import type { CategoriaCotizacion, Cotizacion } from '@/types';
+
+type ActiveTab = 'resumen' | CategoriaCotizacion;
 
 function CotizacionCard({ cot }: { cot: Cotizacion }) {
   const { formatAmount, currency } = useCurrencyStore();
@@ -105,7 +108,7 @@ function CotizacionCard({ cot }: { cot: Cotizacion }) {
 }
 
 export default function CotizacionesPage() {
-  const [activeTab, setActiveTab] = useState<CategoriaCotizacion>('construccion');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('resumen');
   const { cotizaciones, loading } = useCotizacionesStore();
 
   const porCategoria = (cat: CategoriaCotizacion) =>
@@ -122,8 +125,14 @@ export default function CotizacionesPage() {
         <div className="accent-rule mt-4" />
       </header>
 
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as CategoriaCotizacion)}>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as ActiveTab)}>
         <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
+          {/* Pestaña resumen financiero */}
+          <TabsTrigger value="resumen" className="flex-none">
+            <ChartNoAxesCombined size={15} />
+            <span className="hidden sm:inline">Resumen financiero</span>
+          </TabsTrigger>
+
           {CATEGORIAS.map((cat) => {
             const count = porCategoria(cat.value).length;
             const Icon = cat.icon;
@@ -140,6 +149,22 @@ export default function CotizacionesPage() {
             );
           })}
         </TabsList>
+
+        {/* Contenido pestaña resumen */}
+        <TabsContent value="resumen" className="mt-5">
+          {loading ? (
+            <div className="surface-soft rounded-xl p-4 text-sm text-muted-foreground">Cargando...</div>
+          ) : cotizaciones.length === 0 ? (
+            <div className="surface-soft rounded-xl p-6 text-sm text-muted-foreground">
+              Aún no hay cotizaciones. Crea tu primera en las pestañas de categorías.
+            </div>
+          ) : (
+            <ResumenDashboard
+              cotizaciones={cotizaciones.map((c) => ({ categoria: c.categoria, nombre: c.nombre, total: c.total }))}
+              proyectoNombre="Cultivo Orellana - Fase 1"
+            />
+          )}
+        </TabsContent>
 
         {CATEGORIAS.map((cat) => {
           const lista = porCategoria(cat.value);
