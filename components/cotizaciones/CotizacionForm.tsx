@@ -2,7 +2,7 @@
 
 import type { ElementType } from 'react';
 import { useState } from 'react';
-import { useForm, useFieldArray, useWatch, type FieldPath } from 'react-hook-form';
+import { useForm, useFieldArray, type FieldPath } from 'react-hook-form';
 import { useCurrencyStore } from '@/store/currency';
 import { useAuthStore } from '@/store/auth';
 import { guardarCotizacion } from '@/lib/firestore';
@@ -51,7 +51,7 @@ export function CotizacionForm({ categoria }: Props) {
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const { register, control, handleSubmit, reset } = useForm<FormData>({
+  const { register, control, handleSubmit, reset, watch } = useForm<FormData>({
     defaultValues: {
       nombre: '',
       notas: '',
@@ -60,8 +60,8 @@ export function CotizacionForm({ categoria }: Props) {
   });
 
   const { fields, append, remove } = useFieldArray({ control, name: 'items' });
-  const items = useWatch({ control, name: 'items' });
-  const total = items.reduce((acc, item) => acc + (Number(item.cantidad) || 0) * (Number(item.precioUnitario) || 0), 0);
+  const items = watch('items');
+  const total = (items ?? []).reduce((acc, item) => acc + (Number(item.cantidad) || 0) * (Number(item.precioUnitario) || 0), 0);
 
   const onSubmit = async (data: FormData) => {
     if (!user) return;
