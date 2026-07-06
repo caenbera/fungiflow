@@ -2,25 +2,25 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Te invitaron a FungiFlow',
-  description: 'Acepta la invitación y únete al equipo de gestión de cultivos de hongos.',
+  description: 'Únete al equipo y empieza a colaborar en la gestión integral del cultivo de hongos.',
   openGraph: {
     title: '🍄 Te invitaron a FungiFlow',
-    description: 'Únete a nuestra empresa en FungiFlow — la plataforma de gestión integral de cultivos de hongos.',
+    description: 'Únete al equipo y empieza a colaborar en la gestión integral del cultivo de hongos.',
     images: [
       {
-        url: 'https://i.postimg.cc/DzDbvHmK/logo-original.png',
-        width: 512,
-        height: 512,
-        alt: 'FungiFlow',
+        url: 'https://i.postimg.cc/QxYCFWvC/logo.png',
+        width: 1254,
+        height: 1254,
+        alt: 'FungiFlow — Invitación al equipo',
       },
     ],
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: '🍄 Te invitaron a FungiFlow',
-    description: 'Únete a nuestra empresa en FungiFlow — la plataforma de gestión integral de cultivos de hongos.',
-    images: ['https://i.postimg.cc/DzDbvHmK/logo-original.png'],
+    description: 'Únete al equipo y empieza a colaborar en la gestión integral del cultivo de hongos.',
+    images: ['https://i.postimg.cc/QxYCFWvC/logo.png'],
   },
 };
 
