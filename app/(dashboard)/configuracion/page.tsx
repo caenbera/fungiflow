@@ -8,8 +8,9 @@ import { Apariencia }           from '@/components/configuracion/Apariencia';
 import { ConfigGranja, UsuariosPermisos, IntegracionesActivas } from '@/components/configuracion/PanelesCentro';
 import { ModulosActivados }     from '@/components/configuracion/ModulosActivados';
 import { SidebarConfig }        from '@/components/configuracion/SidebarConfig';
+import { Equipo }               from '@/components/configuracion/Equipo';
 
-const TABS = ['General','Granja','Usuarios y permisos','Módulos','Integraciones','Notificaciones','Seguridad','Facturación'] as const;
+const TABS = ['General','Equipo','Granja','Usuarios y permisos','Módulos','Integraciones','Notificaciones','Seguridad','Facturación'] as const;
 type Tab = typeof TABS[number];
 
 export default function ConfiguracionPage() {
@@ -56,8 +57,11 @@ export default function ConfiguracionPage() {
         </div>
       </div>
 
+      {/* Equipo tab — full width */}
+      {tab === 'Equipo' && <Equipo/>}
+
       {/* Main grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+      {tab !== 'Equipo' && <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
 
         {/* Left content: 3-col inner grid */}
         <div className="lg:col-span-9 flex flex-col gap-4">
@@ -81,7 +85,7 @@ export default function ConfiguracionPage() {
         <div className="lg:col-span-3">
           <SidebarConfig/>
         </div>
-      </div>
+      </div>}
 
     </div>
   );

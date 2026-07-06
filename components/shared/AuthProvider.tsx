@@ -10,7 +10,12 @@ import { useCurrencyStore } from '@/store/currency';
 import { useCotizacionesStore } from '@/store/cotizaciones';
 import type { UserRole } from '@/lib/user-role';
 
-async function ensureUserDoc(user: User): Promise<UserRole> {
+interface UserDocResult {
+  role: UserRole;
+  orgId: string;
+}
+
+async function ensureUserDoc(user: User): Promise<UserDocResult> {
   const ref = doc(db, 'users', user.uid);
   const snap = await getDoc(ref);
   if (!snap.exists()) {
@@ -18,15 +23,23 @@ async function ensureUserDoc(user: User): Promise<UserRole> {
       email: user.email,
       displayName: user.displayName,
       role: 'admin',
+      orgId: user.uid,
       createdAt: Date.now(),
     });
-    return 'admin';
+    return { role: 'admin', orgId: user.uid };
   }
-  return (snap.data()?.role ?? 'admin') as UserRole;
+  const data = snap.data();
+  const role = (data?.role ?? 'admin') as UserRole;
+  // Back-fill orgId for existing users who registered before invitations
+  const orgId = data?.orgId ?? user.uid;
+  if (!data?.orgId) {
+    await setDoc(ref, { orgId }, { merge: true });
+  }
+  return { role, orgId };
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { setUser, setRole } = useAuthStore();
+  const { setUser, setRole, setOrgId } = useAuthStore();
   const { fetchRates } = useCurrencyStore();
   const { iniciar, detener } = useCotizacionesStore();
 
@@ -36,15 +49,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(user);
       if (user) {
         iniciar(user.uid);
-        const role = await ensureUserDoc(user);
+        const { role, orgId } = await ensureUserDoc(user);
         setRole(role);
+        setOrgId(orgId);
       } else {
         detener();
         setRole(null);
+        setOrgId(null);
       }
     });
     return unsub;
-  }, [setUser, setRole, fetchRates, iniciar, detener]);
+  }, [setUser, setRole, setOrgId, fetchRates, iniciar, detener]);
 
   return <>{children}</>;
 }
