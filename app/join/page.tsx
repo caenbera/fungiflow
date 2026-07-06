@@ -6,13 +6,16 @@ const TITLE    = '🍄 Te invitaron a FungiFlow';
 const DESC     = 'Únete al equipo y empieza a colaborar en la gestión integral del cultivo de hongos.';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://fungiflow.vercel.app'),
   title: 'Te invitaron a FungiFlow',
   description: DESC,
   openGraph: {
+    url: 'https://fungiflow.vercel.app/join',
     title: TITLE,
     description: DESC,
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'FungiFlow — Invitación al equipo' }],
+    images: [{ url: OG_IMAGE, width: 1254, height: 1254, alt: 'FungiFlow — Invitación al equipo' }],
     type: 'website',
+    siteName: 'FungiFlow',
   },
   twitter: {
     card: 'summary_large_image',
