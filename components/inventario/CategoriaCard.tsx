@@ -1,10 +1,10 @@
-import { FlaskConical, Wheat, Package, Box, Sprout, Wrench, MapPin, ScanBarcode } from 'lucide-react';
+import { FlaskConical, Wheat, Package, Box, Sprout, Wrench, MapPin, ScanBarcode, type LucideIcon } from 'lucide-react';
 import { IconTile } from '@/components/dashboard-v2/IconTile';
 import type { CATEGORIAS_INV } from './mock-data';
 
 type Cat = typeof CATEGORIAS_INV[number];
 
-const CAT_ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
+const CAT_ICONS: Record<string, LucideIcon> = {
   micelio: Sprout, materiaprima: Wheat, bolsas: Package, empaques: Box,
   terminados: FlaskConical, equipos: Wrench, ubicaciones: MapPin, lotes: ScanBarcode,
 };
