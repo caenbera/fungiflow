@@ -25,7 +25,7 @@ export function PlanoFinca() {
       >
         {/* Imagen de fondo */}
         <img
-          src="/carousel/14.png"
+          src="https://i.postimg.cc/tCGKsZ7y/14.png"
           alt="Finca"
           className="absolute inset-0 w-full h-full object-cover"
         />

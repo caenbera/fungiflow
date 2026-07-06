@@ -19,7 +19,7 @@ export function HeroRow() {
       {/* ── Hero card ── */}
       <div className="relative rounded-2xl overflow-hidden min-h-[200px] flex flex-col justify-end"
         style={{ boxShadow: 'var(--shadow-raised)' }}>
-        <img src="/carousel/02.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="https://i.postimg.cc/26Hsq2qd/02.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
         <div className="relative z-10 p-5">
           <div className="flex items-center gap-2 mb-2">

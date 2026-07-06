@@ -198,7 +198,7 @@ export function Sidebar() {
       <div className="ff-sidebar-header">
         <div className="ff-sidebar-logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="FungiFlow" />
+          <img src="https://i.postimg.cc/DzDbvHmK/logo-original.png" alt="FungiFlow" />
         </div>
         {!collapsed && (
           <div className="ff-sidebar-brand">

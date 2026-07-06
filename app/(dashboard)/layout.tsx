@@ -39,24 +39,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="app-shell-3d flex h-screen overflow-hidden">
       <Sidebar />
       <main className="page-surface relative flex-1 overflow-y-auto">
-        {/* Mushroom — fixed to viewport bottom-right corner, above cards */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/hongo-inferior-derecho.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none select-none"
-          style={{
-            position: 'fixed',
-            bottom: '-16px',
-            right: '-8px',
-            width: '290px',
-            zIndex: 40,
-            opacity: 0.95,
-            filter: 'drop-shadow(0 -8px 24px rgba(0,0,0,0.18))',
-          }}
-        />
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-7 md:px-8 lg:px-10">
+<div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-7 md:px-8 lg:px-10">
           {children}
         </div>
       </main>

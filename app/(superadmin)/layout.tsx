@@ -20,7 +20,7 @@ export default function SuperAdminLayout({ children }: { children: React.ReactNo
       <div className="app-shell-3d min-h-screen flex items-center justify-center">
         <div className="surface-raised rounded-2xl px-8 py-7 text-center space-y-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="FungiFlow" width={52} height={52} className="mx-auto animate-pulse object-contain" />
+          <img src="https://i.postimg.cc/DzDbvHmK/logo-original.png" alt="FungiFlow" width={52} height={52} className="mx-auto animate-pulse object-contain" />
           <p className="text-sm text-muted-foreground italic">Verificando acceso...</p>
         </div>
       </div>

@@ -3,7 +3,22 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
-const SLIDES = Array.from({ length: 14 }, (_, i) => `/carousel/${String(i + 1).padStart(2, '0')}.png`);
+const SLIDES = [
+  'https://i.postimg.cc/nzdys0sY/01.png',
+  'https://i.postimg.cc/26Hsq2qd/02.png',
+  'https://i.postimg.cc/50PhHnH8/03.png',
+  'https://i.postimg.cc/76BFCmC0/04.png',
+  'https://i.postimg.cc/MTsCcdcC/05.png',
+  'https://i.postimg.cc/ryH6MZXB/06.png',
+  'https://i.postimg.cc/v8KRb2ww/07.png',
+  'https://i.postimg.cc/MZLkq3J2/08.png',
+  'https://i.postimg.cc/wxrKg4Y1/09.png',
+  'https://i.postimg.cc/Hs8qx0TV/10.png',
+  'https://i.postimg.cc/VL0x69zr/11.png',
+  'https://i.postimg.cc/28Ls6dCh/12.png',
+  'https://i.postimg.cc/xTNwCG9G/13.png',
+  'https://i.postimg.cc/tCGKsZ7y/14.png',
+];
 
 const INTERVAL = 2000;
 
@@ -82,7 +97,7 @@ export function AuthCarousel() {
       {/* Logo */}
       <div className="absolute top-8 left-0 right-0 flex justify-center z-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="FungiFlow" className="w-36 h-36 object-contain drop-shadow-lg" />
+        <img src="https://i.postimg.cc/DzDbvHmK/logo-original.png" alt="FungiFlow" className="w-36 h-36 object-contain drop-shadow-lg" />
       </div>
 
       {/* Center text */}
