@@ -174,7 +174,7 @@ function NavItem({
 function NavSection({
   label, items, collapsed, pathname, defaultOpen = true,
 }: {
-  label: string; items: typeof ADMIN_ITEMS;
+  label: string; items: { href: string; label: string; icon: React.ElementType }[];
   collapsed: boolean; pathname: string; defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
