@@ -20,20 +20,55 @@ import {
 
 /* ── Nav items ─────────────────────────────────────────── */
 
-const ADMIN_ITEMS = [
-  { href: '/dashboard',     label: 'Dashboard',         icon: LayoutDashboard },
-  { href: '/cotizaciones',  label: 'Cotizaciones',      icon: FileText },
-  { href: '/clientes',       label: 'Clientes',          icon: Users },
-  { href: '/productos',      label: 'Productos',         icon: Package },
-  { href: '/inventario',    label: 'Inventario',        icon: ClipboardList },
-  { href: '/ordenes',        label: 'Órdenes de compra', icon: Boxes },
-  { href: '/proveedores',    label: 'Proveedores',       icon: Building2 },
-  { href: '/produccion',     label: 'Producción',        icon: ShoppingCart },
-  { href: '/logistica',     label: 'Logística',         icon: Truck },
-  { href: '/reportes',      label: 'Reportes',          icon: BarChart3 },
-  { href: '/configuracion', label: 'Configuración',     icon: Settings },
-  { href: '/calculadoras',  label: 'Calculadoras',      icon: Calculator },
-  { href: '/checklists',   label: 'Listas de Chequeo', icon: CheckSquare },
+const ADMIN_GROUPS = [
+  {
+    label: 'Principal',
+    items: [
+      { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    ],
+  },
+  {
+    label: 'Comercial',
+    items: [
+      { href: '/clientes',      label: 'Clientes',      icon: Users    },
+      { href: '/cotizaciones',  label: 'Cotizaciones',  icon: FileText },
+    ],
+  },
+  {
+    label: 'Inventario & Compras',
+    items: [
+      { href: '/productos',    label: 'Productos',         icon: Package    },
+      { href: '/inventario',   label: 'Inventario',        icon: ClipboardList },
+      { href: '/proveedores',  label: 'Proveedores',       icon: Building2  },
+      { href: '/ordenes',      label: 'Órdenes de compra', icon: Boxes      },
+    ],
+  },
+  {
+    label: 'Operaciones',
+    items: [
+      { href: '/produccion', label: 'Producción', icon: ShoppingCart },
+      { href: '/logistica',  label: 'Logística',  icon: Truck        },
+    ],
+  },
+  {
+    label: 'Análisis',
+    items: [
+      { href: '/reportes', label: 'Reportes', icon: BarChart3 },
+    ],
+  },
+  {
+    label: 'Herramientas',
+    items: [
+      { href: '/calculadoras', label: 'Calculadoras',      icon: Calculator  },
+      { href: '/checklists',   label: 'Listas de Chequeo', icon: CheckSquare },
+    ],
+  },
+  {
+    label: 'Sistema',
+    items: [
+      { href: '/configuracion', label: 'Configuración', icon: Settings },
+    ],
+  },
 ];
 
 const SUPERADMIN_GROUPS = [
@@ -272,7 +307,7 @@ export function Sidebar({
                 items={group.items}
                 collapsed={collapsed}
                 pathname={pathname}
-                defaultOpen={group.label === 'Plataforma'}
+                defaultOpen={false}
               />
             ))}
 
@@ -283,18 +318,16 @@ export function Sidebar({
         )}
 
         {/* ── ADMIN NAV ── */}
-        <nav className="ff-sidebar-nav">
-          {ADMIN_ITEMS.map(({ href, label, icon: Icon }) => {
-            const isReal = href.startsWith('/');
-            const active = isReal && pathname.startsWith(href);
-            return (
-              <NavItem
-                key={href} href={href} label={label} icon={Icon}
-                active={active} disabled={!isReal} collapsed={collapsed}
-              />
-            );
-          })}
-        </nav>
+        {ADMIN_GROUPS.map((group) => (
+          <NavSection
+            key={group.label}
+            label={group.label}
+            items={group.items}
+            collapsed={collapsed}
+            pathname={pathname}
+            defaultOpen={false}
+          />
+        ))}
 
         {/* Currency */}
         {!collapsed && (
