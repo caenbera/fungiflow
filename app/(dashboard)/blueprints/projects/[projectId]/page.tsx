@@ -18,6 +18,8 @@ import {
   ArrowRight,
   Shield,
   Layers,
+  BellRing,
+  RefreshCw,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,6 +31,7 @@ import { resolveStepIcon, STEP_STATUS_META } from "@/lib/step-icon";
 import { PHASE_STATUS_META, resolvePhaseIcon } from "@/lib/phase-icon";
 import { periodLabel } from "@/lib/period";
 import { getProject, syncProjectBlueprint } from "@/lib/services/projects";
+import { getBlueprint } from "@/lib/services/blueprints";
 import {
   buildRoadmapTree,
   calculatePhaseStatus,
@@ -48,6 +51,7 @@ import type {
   ProjectStepState,
   BlueprintStep,
   BlueprintPhase,
+  Blueprint,
 } from "@/types";
 
 export default function ProjectRoadmapPage() {
@@ -57,6 +61,7 @@ export default function ProjectRoadmapPage() {
 
   const [project, setProject] = useState<Project | null>(null);
   const [stepStates, setStepStates] = useState<ProjectStepState[] | null>(null);
+  const [latestBlueprint, setLatestBlueprint] = useState<Blueprint | null>(null);
   const [openKeys, setOpenKeys] = useState<Record<string, boolean>>({
     construction: true, // Abre por defecto Construcción
     operations: true,  // Abre por defecto Operación
@@ -69,6 +74,9 @@ export default function ProjectRoadmapPage() {
       .then(([p, states]) => {
         setProject(p);
         setStepStates(states);
+        if (p) {
+          getBlueprint(p.blueprintId).then(setLatestBlueprint);
+        }
       })
       .catch((err) => {
         toast.error("Error al cargar la hoja de ruta.");
@@ -93,6 +101,12 @@ export default function ProjectRoadmapPage() {
   const next = findNextStep(project.blueprintSnapshot, stepStates);
   const nextPhaseId = next?.phase.id ?? null;
   const tree = buildRoadmapTree(project, stepStates);
+
+  const isStale = Boolean(
+    project &&
+      latestBlueprint &&
+      latestBlueprint.updatedAt !== project.blueprintSnapshot.updatedAt
+  );
 
   function toggleKey(key: string) {
     setOpenKeys((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -370,6 +384,31 @@ export default function ProjectRoadmapPage() {
           <span className="text-[#2b1b10] font-bold">Hoja de Ruta</span>
         </nav>
       </div>
+
+      {/* Sync Update Alert Banner */}
+      {isStale && (
+        <div className="border-[#CA9318] bg-[#CA9318]/5 rounded-2xl border-2 px-5 py-3.5 flex items-center justify-between gap-3 shadow-md animate-pulse">
+          <div className="flex items-center gap-2.5">
+            <BellRing className="text-[#CA9318] h-5 w-5 shrink-0" />
+            <p className="text-sm font-semibold text-[#2b1b10]">
+              Hay una versión más reciente de esta metodología disponible. Sincroniza para aplicar los cambios sin perder tu progreso.
+            </p>
+          </div>
+          <Button
+            size="sm"
+            onClick={handleSync}
+            disabled={syncing}
+            className="shrink-0"
+          >
+            {syncing ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" />
+            ) : (
+              <RefreshCw className="h-3.5 w-3.5 mr-1" />
+            )}
+            Sincronizar ahora
+          </Button>
+        </div>
+      )}
 
       {/* Hero Stats */}
       <div className="surface-raised rounded-2xl p-6 flex flex-col md:flex-row md:items-start gap-4">
