@@ -50,11 +50,11 @@ export const PHASE_BADGE_COLORS = [
 
 export const PHASE_STATUS_META: Record<
   PhaseRowStatus,
-  { label: string; variant: "secondary" | "warning" | "info" | "success" | "destructive" }
+  { label: string; variant: "outline" | "default" | "secondary" | "destructive" }
 > = {
-  pendiente: { label: "Pendiente", variant: "secondary" },
-  disponible: { label: "Disponible", variant: "warning" },
-  en_progreso: { label: "En progreso", variant: "info" },
-  completada: { label: "Completada", variant: "success" },
+  pendiente: { label: "Pendiente", variant: "outline" },
+  disponible: { label: "Disponible", variant: "default" },
+  en_progreso: { label: "En progreso", variant: "default" },
+  completada: { label: "Completada", variant: "secondary" },
   bloqueada: { label: "Bloqueada", variant: "destructive" },
 };

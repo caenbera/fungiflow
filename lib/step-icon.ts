@@ -62,10 +62,10 @@ export function resolveStepIcon(step: { title: string; icon?: string }): LucideI
 
 export const STEP_STATUS_META: Record<
   StepRowStatus,
-  { label: string; variant: "secondary" | "info" | "success" | "outline" }
+  { label: string; variant: "outline" | "default" | "secondary" | "destructive" }
 > = {
-  completado: { label: "Completado", variant: "success" },
-  en_progreso: { label: "En progreso", variant: "info" },
+  completado: { label: "Completado", variant: "secondary" },
+  en_progreso: { label: "En progreso", variant: "default" },
   pendiente: { label: "Pendiente", variant: "outline" },
-  bloqueado: { label: "Bloqueado", variant: "secondary" },
+  bloqueado: { label: "Bloqueado", variant: "destructive" },
 };

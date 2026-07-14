@@ -194,3 +194,53 @@ export interface Blueprint {
   createdAt: string;
   updatedAt: string;
 }
+
+export type StepStatus = "pending" | "in_progress" | "completed" | "blocked";
+export type ProgressStatus = "no_iniciado" | "en_progreso" | "aprobado";
+
+export interface Comment {
+  id: string;
+  authorUid: string;
+  authorName: string;
+  text: string;
+  createdAt: string;
+}
+
+export interface StepNote {
+  id: string;
+  authorUid: string;
+  text: string;
+  createdAt: string;
+}
+
+export interface ProjectStepState {
+  stepId: string;
+  status: StepStatus;
+  checklistDone: string[];
+  timeInvestedMinutes: number;
+  completedAt: string | null;
+  completedBy: string | null;
+  updatedAt: string;
+  registroData?: Record<string, string>;
+  periodCompletions?: Record<
+    string,
+    {
+      completedAt: string;
+      completedBy: string;
+    }
+  >;
+}
+
+export interface Project {
+  id: string;
+  orgId: string;
+  blueprintId: string;
+  blueprintSnapshot: Blueprint;
+  name: string;
+  icon: string;
+  deletionStatus: "active" | "archived" | "deleted";
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
