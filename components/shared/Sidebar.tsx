@@ -25,6 +25,7 @@ const ADMIN_GROUPS = [
     label: 'Principal',
     items: [
       { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      { href: '/blueprints', label: 'Blueprints de Cultivo', icon: FileStack },
     ],
   },
   {
@@ -79,6 +80,7 @@ const SUPERADMIN_GROUPS = [
       { href: '/superadmin/empresas',    label: 'Empresas',          icon: Building2 },
       { href: '/superadmin/clientes',    label: 'Clientes',          icon: Users },
       { href: '/superadmin/planes',      label: 'Planes',            icon: Layers },
+      { href: '/superadmin/blueprints',  label: 'Blueprints de Cultivo', icon: FileStack },
     ],
   },
   {

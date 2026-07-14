@@ -1,0 +1,60 @@
+import {
+  Briefcase,
+  DollarSign,
+  Flag,
+  Landmark,
+  Megaphone,
+  Rocket,
+  Scale,
+  Settings,
+  type LucideIcon,
+} from "lucide-react";
+
+export type PhaseRowStatus = "pendiente" | "disponible" | "en_progreso" | "completada" | "bloqueada";
+
+const PHASE_ICON_KEYWORDS: { icon: LucideIcon; keywords: string[] }[] = [
+  { icon: Landmark, keywords: ["constitucion", "constitución", "fundacion", "fundación"] },
+  { icon: Scale, keywords: ["legal", "fiscal", "normativ"] },
+  { icon: Briefcase, keywords: ["negocio", "estrategia", "modelo"] },
+  { icon: Settings, keywords: ["operacion", "operación", "proceso"] },
+  { icon: DollarSign, keywords: ["finanza", "financier", "contab", "presupuesto"] },
+  { icon: Megaphone, keywords: ["marketing", "venta", "publicidad", "comercial"] },
+  { icon: Rocket, keywords: ["crecimiento", "escala", "expansion", "expansión", "lanzamiento"] },
+];
+
+export function resolvePhaseIcon(title: string): LucideIcon {
+  const normalized = title.toLowerCase();
+  const match = PHASE_ICON_KEYWORDS.find((entry) =>
+    entry.keywords.some((keyword) => normalized.includes(keyword)),
+  );
+  return match?.icon ?? Flag;
+}
+
+export const PHASE_TILE_COLORS = [
+  "bg-primary/10 text-primary",
+  "bg-success/10 text-success",
+  "bg-chart-2/10 text-chart-2",
+  "bg-warning/10 text-warning",
+  "bg-chart-3/10 text-chart-3",
+  "bg-chart-5/10 text-chart-5",
+];
+
+export const PHASE_BADGE_COLORS = [
+  "bg-primary text-primary-foreground",
+  "bg-success text-white",
+  "bg-chart-2 text-white",
+  "bg-warning text-white",
+  "bg-chart-3 text-white",
+  "bg-chart-5 text-white",
+];
+
+export const PHASE_STATUS_META: Record<
+  PhaseRowStatus,
+  { label: string; variant: "secondary" | "warning" | "info" | "success" | "destructive" }
+> = {
+  pendiente: { label: "Pendiente", variant: "secondary" },
+  disponible: { label: "Disponible", variant: "warning" },
+  en_progreso: { label: "En progreso", variant: "info" },
+  completada: { label: "Completada", variant: "success" },
+  bloqueada: { label: "Bloqueada", variant: "destructive" },
+};

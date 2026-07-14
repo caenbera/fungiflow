@@ -74,3 +74,6 @@ export interface CalcSustratoInputs {
   porcentajeAgua: number;
   porcentajeMelaza: number;
 }
+
+export * from './blueprints';
+
