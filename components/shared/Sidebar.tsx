@@ -40,6 +40,7 @@ const ADMIN_GROUPS = [
     items: [
       { href: '/productos',    label: 'Productos',         icon: Package    },
       { href: '/inventario',   label: 'Inventario',        icon: ClipboardList },
+      { href: '/marketplace',  label: 'Marketplace',       icon: Store      },
       { href: '/proveedores',  label: 'Proveedores',       icon: Building2  },
       { href: '/ordenes',      label: 'Órdenes de compra', icon: Boxes      },
     ],
